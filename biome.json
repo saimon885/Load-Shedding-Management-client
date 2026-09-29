@@ -21,6 +21,7 @@
   },
   "linter": {
     "enabled": true,
+
     "rules": {
       "recommended": true
     },
@@ -29,6 +30,7 @@
       "react": "recommended"
     }
   },
+
   "assist": {
     "actions": {
       "source": {

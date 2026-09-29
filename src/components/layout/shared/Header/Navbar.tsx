@@ -1,220 +1,254 @@
 "use client";
-
-import { ChevronDown, Menu, X } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import ActiveLink from "./ActiveLink";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
+import {
+  User,
+  LogOut,
+  Settings,
+  HelpCircle,
+  Menu,
+  X,
+  ChevronDown,
+} from "lucide-react";
+import { UsegetMeHook } from "@/hooks/auth.hook";
+import LogOutUser from "./LogOut";
 
-const navItems = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "Outages",
-    children: [
-      {
-        label: "All Outages",
-        href: "/outages",
-      },
-      {
-        label: "Report Outage",
-        href: "/outages/report",
-      },
-    ],
-  },
-  {
-    label: "Schedules",
-    children: [
-      {
-        label: "Load Shedding",
-        href: "/schedules",
-      },
-      {
-        label: "Upcoming",
-        href: "/schedules/upcoming",
-      },
-    ],
-  },
-  {
-    label: "Reports",
-    href: "/reports",
-  },
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/outage", label: "outage" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact" },
 ];
 
-const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+const MENU_ITEMS = [
+  { href: "/profile", label: "My Profile", icon: User },
+  { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/help", label: "Help & Support", icon: HelpCircle },
+];
 
-  const toggleDropdown = (label: string) => {
-    setDropdownOpen((current) => (current === label ? null : label));
-  };
+export default function Navbar() {
+  const pathname = usePathname();
+  const { data, isLoading } = UsegetMeHook();
 
-  const closeMobileMenu = () => {
-    setMobileOpen(false);
-    setDropdownOpen(null);
-  };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const user = data?.data;
+  const isLoggedIn = !!user;
+  const initial = user?.name?.charAt(0)?.toUpperCase() || "U";
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close everything on Escape
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setIsDropdownOpen(false);
+        setIsMobileMenuOpen(false);
+      }
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  // Shadow only after scrolling
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close menus when the route changes
+  useEffect(() => {
+    if (pathname) {
+    }
+    setIsDropdownOpen(false);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname?.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 shadow-sm backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Logo />
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-shadow duration-200 ${
+        scrolled ? "shadow-md" : "shadow-none"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Logo />
+          </div>
 
-        <div className="hidden lg:flex lg:items-center">
-          <ul className="flex items-center gap-1">
-            {navItems.map((item) => (
-              <li key={item.label} className="relative">
-                {item.children ? (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => toggleDropdown(item.label)}
-                      className="flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                    >
-                      {item.label}
-
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform ${
-                          dropdownOpen === item.label ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {dropdownOpen === item.label && (
-                      <div className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border bg-background p-1.5 shadow-lg">
-                        {item.children.map((child) => (
-                          <ActiveLink
-                            key={child.href}
-                            href={child.href}
-                            onClick={() => setDropdownOpen(null)}
-                            className="block rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                            activeClassName="bg-accent text-blue-600 dark:text-sky-400"
-                          >
-                            {child.label}
-                          </ActiveLink>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <ActiveLink
-                    href={item.href}
-                    className="rounded-md px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                    activeClassName="bg-accent text-blue-600 dark:text-sky-400"
-                  >
-                    {item.label}
-                  </ActiveLink>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <Button size={"lg"} variant={"destructive"}>
-            <Link href="/login" onClick={closeMobileMenu}>
-              Login
-            </Link>
-          </Button>
-
-          <Button size={"lg"} variant={"outline"}>
-            <Link href="/dashboard" onClick={closeMobileMenu}>
-              Dashboard
-            </Link>
-          </Button>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent lg:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
-        </button>
-      </nav>
-
-      {mobileOpen && (
-        <div className="border-t bg-background lg:hidden">
-          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
-            <ul className="flex flex-col gap-1">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  {item.children ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => toggleDropdown(item.label)}
-                        className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                      >
-                        {item.label}
-
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform ${
-                            dropdownOpen === item.label ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-
-                      {dropdownOpen === item.label && (
-                        <div className="ml-3 mt-1 border-l pl-3">
-                          {item.children.map((child) => (
-                            <ActiveLink
-                              key={child.href}
-                              href={child.href}
-                              onClick={closeMobileMenu}
-                              className="block rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                              activeClassName="bg-accent text-blue-600 dark:text-sky-400"
-                            >
-                              {child.label}
-                            </ActiveLink>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <ActiveLink
-                      href={item.href}
-                      onClick={closeMobileMenu}
-                      className="block rounded-md px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-accent hover:text-accent-foreground dark:text-slate-300"
-                      activeClassName="bg-accent text-blue-600 dark:text-sky-400"
-                    >
-                      {item.label}
-                    </ActiveLink>
-                  )}
-                </li>
-              ))}
-
-              <li className="mt-2 border-t pt-3">
-                <Button size={"lg"} variant={"destructive"}>
-                  <Link href="/login" onClick={closeMobileMenu}>
-                    Login
-                  </Link>
-                </Button>
-              </li>
-
-              <li>
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
                 <Link
-                  href="/dashboard"
-                  onClick={closeMobileMenu}
-                  className="flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F4C81] ${
+                    active
+                      ? "text-[#0F4C81] dark:text-sky-400"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0F4C81] dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  }`}
                 >
-                  Dashboard
+                  {link.label}
+                  {active && (
+                    <span className="absolute left-3 right-3 -bottom-[13px] h-0.5 rounded-full bg-[#0F4C81] dark:bg-sky-400" />
+                  )}
                 </Link>
-              </li>
-            </ul>
+              );
+            })}
+          </div>
+
+          {/* Right side */}
+          <div className="flex items-center gap-3">
+            {isLoading ? (
+              <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 animate-pulse" />
+            ) : isLoggedIn ? (
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded={isDropdownOpen}
+                  onClick={() => setIsDropdownOpen((v) => !v)}
+                  className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F4C81]"
+                >
+                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#0F4C81] dark:bg-sky-500 text-white text-sm font-semibold">
+                    {initial}
+                  </span>
+                  <ChevronDown
+                    size={16}
+                    className={`hidden sm:block text-slate-500 dark:text-slate-400 transition-transform ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {isDropdownOpen && (
+                  <div
+                    role="menu"
+                    className="absolute right-0 mt-2 w-60 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-1 z-50"
+                  >
+                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                        {user?.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+
+                    {MENU_ITEMS.map(({ href, label, icon: Icon }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        role="menuitem"
+                        className="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"
+                      >
+                        <Icon size={16} />
+                        <span>{label}</span>
+                      </Link>
+                    ))}
+
+                    <div className="border-t border-slate-100 dark:border-slate-700 mt-1 pt-1">
+                      <LogOutUser></LogOutUser>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <Link
+                  href="/login"
+                  className="px-4 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#0F4C81] hover:bg-[#0A365C] dark:bg-sky-500 dark:hover:bg-sky-600 transition"
+                >
+                  Get started
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile toggle */}
+            <button
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-[#0F4C81] dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
-  );
-};
+      </div>
 
-export default Navbar;
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-3 space-y-1 shadow-lg z-40">
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`block px-3 py-2 rounded-md text-base font-medium transition ${
+                  active
+                    ? "bg-slate-100 dark:bg-slate-800 text-[#0F4C81] dark:text-sky-400"
+                    : "text-slate-700 dark:text-slate-200 hover:text-[#0F4C81] dark:hover:text-sky-400 hover:bg-slate-50 dark:hover:bg-slate-800"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          {!isLoading && !isLoggedIn && (
+            <div className="grid grid-cols-2 gap-2 pt-3 mt-2 border-t border-slate-100 dark:border-slate-800">
+              <Link
+                href="/login"
+                className="text-center px-4 py-2 rounded-lg text-sm font-medium border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/register"
+                className="text-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#0F4C81] dark:bg-sky-500"
+              >
+                Get started
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+    </nav>
+  );
+}

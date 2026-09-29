@@ -6,7 +6,7 @@ import PowerOverview from "@/components/layout/home/PowerOverview";
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="my-5 md:my-0">
       <HeroSection />
       <PowerOverview />
       <HowItWorks />

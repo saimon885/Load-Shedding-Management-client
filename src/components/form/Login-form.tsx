@@ -16,10 +16,16 @@ import {
   FieldSeparator,
 } from "../ui/field";
 import { Input } from "../ui/input";
+import apiClient from "@/lib/ApiClient";
+import { UseLoginHook } from "@/hooks/auth.hook";
+import { toast } from "../ui/toast";
+import { FaSpinner } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const router = useRouter();
+  const { mutate: login, isPending: isloading } = UseLoginHook();
   const {
     register,
     handleSubmit,
@@ -30,6 +36,25 @@ const LoginForm = () => {
 
   const handleLogin = (data: LoginPayload) => {
     console.log("Login Data:", data);
+    login(data, {
+      onSuccess: (res) => {
+        toast.add({
+          title: "Login Success",
+          description: "Welcome back",
+          type: "success",
+        });
+        if (res.success) {
+          router.push("/");
+        }
+      },
+      onError: (err) => {
+        toast.add({
+          title: "Authorization failure",
+          description: err.message || "Something went wrong. Please try again",
+          type: "error",
+        });
+      },
+    });
   };
 
   const handleGoogleLogin = () => {
@@ -104,7 +129,13 @@ const LoginForm = () => {
 
           <Field>
             <Button type="submit" className="h-10 w-full">
-              Sign in
+              {isloading ? (
+                <>
+                  <FaSpinner /> submitting
+                </>
+              ) : (
+                "Submit"
+              )}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
 

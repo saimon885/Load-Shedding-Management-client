@@ -12,7 +12,7 @@ const Register = () => {
         <div className="grid w-full overflow-hidden rounded-2xl border bg-background shadow-xl lg:grid-cols-2">
           <div className="relative hidden min-h-[680px] overflow-hidden bg-slate-950 lg:block">
             <img
-              src="https://images.openai.com/static-rsc-4/4V2vVcoXiyb8R3qIsoN_vN9tD5t2bOtSXFcfgeO4_zVeh-SdefSbCGC7t98YRpKdo0Bf2GxUJLNCVkfvk5CRLXoaSJhP3UmCqnIln9VZgMMD6nmP7R0XOJCGm94cwItyjzJtaLJ_8dWzBLGt7ypAxATDUQcXaNvOzpyRryKs9tA?purpose=inline"
+              src="/images/register.png"
               alt="Power grid and electricity infrastructure"
               className="absolute inset-0 h-full w-full object-cover"
             />

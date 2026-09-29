@@ -19,7 +19,7 @@ const Login = () => {
         <div className="grid w-full overflow-hidden rounded-2xl border bg-background shadow-xl lg:grid-cols-2">
           <div className="relative hidden min-h-[620px] overflow-hidden bg-slate-950 lg:block">
             <img
-              src="https://images.openai.com/static-rsc-4/fUFo10JgP9fGAVAAKcjZbL367nuwD9zoqSENtUV3-hJqTbIgYO1cMDvOem7FFHUQiqTJ-E89rOgV2lWmvL7fd3d4h0Dhm6qQlVIk7ZSNl7cyxmvuG7jNPFBwCb1eUB-4pqfBzw4BUzNIJGQYDxfnAdbvnM8ZWmd-uMfYSRpYeHY?purpose=inline"
+              src="/images/login.png"
               alt="Power grid and electricity infrastructure"
               className="absolute inset-0 h-full w-full object-cover"
             />

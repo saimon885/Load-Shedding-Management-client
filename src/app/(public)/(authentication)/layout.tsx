@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const Authlayout = ({ children }: { children: ReactNode }) => {
   return <div>{children}</div>;

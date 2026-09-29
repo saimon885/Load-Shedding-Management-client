@@ -1,15 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import type { RegisterPayload } from "@/types/auth/register";
+import { RegisterSchema } from "@/validation/form/auth/RegisterValidation";
+import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { ArrowRight, Eye, EyeOff } from "lucide-react";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { RegisterPayload } from "@/types/auth/register";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema } from "@/validation/form/auth/RegisterValidation";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);

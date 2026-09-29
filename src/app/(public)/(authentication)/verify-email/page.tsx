@@ -1,6 +1,5 @@
-import React from "react";
-import OTP from "@/components/form/OTP";
 import { ShieldCheck, Zap } from "lucide-react";
+import OTP from "@/components/form/OTP";
 
 const InputOTPDemo = () => {
   return (

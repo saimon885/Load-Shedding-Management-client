@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { ShieldCheck, Zap } from "lucide-react";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import Link from "next/link";
 import RegisterForm from "@/components/form/Register-form";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Register = () => {
   return (

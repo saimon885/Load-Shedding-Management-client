@@ -1,4 +1,13 @@
 "use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import type { LoginPayload } from "@/types/auth/login";
+import { LoginSchema } from "@/validation/form/auth/LoginValidation";
+import { Button } from "../ui/button";
 import {
   Field,
   FieldDescription,
@@ -7,24 +16,24 @@ import {
   FieldSeparator,
 } from "../ui/field";
 import { Input } from "../ui/input";
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { ArrowRight, Eye, EyeOff } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { LoginPayload } from "@/types/auth/login";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/validation/form/auth/LoginValidation";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginPayload>({ resolver: zodResolver(LoginSchema) });
+  } = useForm<LoginPayload>({
+    resolver: zodResolver(LoginSchema),
+  });
+
   const handleLogin = (data: LoginPayload) => {
     console.log("Login Data:", data);
+  };
+
+  const handleGoogleLogin = () => {
+    console.log("Google Login");
   };
 
   return (
@@ -33,17 +42,18 @@ const LoginForm = () => {
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="email">Email address</FieldLabel>
+
             <Input
               id="email"
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
-              required
               className="h-11"
               {...register("email")}
             />
+
             {errors.email && (
-              <span className="text-xs text-red-500 mt-1 block">
+              <span className="mt-1 block text-xs text-red-500">
                 {errors.email.message}
               </span>
             )}
@@ -52,6 +62,7 @@ const LoginForm = () => {
           <Field>
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor="password">Password</FieldLabel>
+
               <Link
                 href="/forgot-password"
                 className="text-sm font-medium text-blue-600 hover:underline dark:text-sky-400"
@@ -59,16 +70,17 @@ const LoginForm = () => {
                 Forgot password?
               </Link>
             </div>
+
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 autoComplete="current-password"
-                required
-                className="h-11"
+                className="h-11 pr-11"
                 {...register("password")}
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
@@ -82,17 +94,20 @@ const LoginForm = () => {
                 )}
               </button>
             </div>
+
             {errors.password && (
-              <span className="text-xs text-red-500 mt-1 block">
+              <span className="mt-1 block text-xs text-red-500">
                 {errors.password.message}
               </span>
             )}
           </Field>
 
           <Field>
-            <Button type="submit" className="h-8 w-full">
-              Sign in <ArrowRight className="ml-2 h-4 w-4" />
+            <Button type="submit" className="h-10 w-full">
+              Sign in
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
+
             <FieldDescription className="text-center">
               Don&apos;t have an account?{" "}
               <Link
@@ -105,8 +120,17 @@ const LoginForm = () => {
           </Field>
         </FieldGroup>
       </form>
-      <FieldSeparator className="mt-2">Or continue with</FieldSeparator>
-      <Button className={"w-full h-8 my-3"}>Google</Button>
+
+      <FieldSeparator className="mt-3">Or continue with</FieldSeparator>
+
+      <Button
+        type="button"
+        variant="outline"
+        className="my-3 h-10 w-full"
+        onClick={handleGoogleLogin}
+      >
+        Continue with Google
+      </Button>
     </div>
   );
 };

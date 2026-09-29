@@ -14,7 +14,7 @@ export const RegisterSchema = z
       .regex(/[a-z]/, "Must contain at least 1 lowercase letter")
       .regex(/\d/, "Must contain at least 1 number")
       .regex(
-        /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/,
+        /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/,
         "Must contain at least 1 special character",
       ),
     confirmPassword: z.string().min(1, "Please confirm your password"),

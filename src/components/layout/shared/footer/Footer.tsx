@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Mail, MapPin, Phone, Zap } from "lucide-react";
+import Link from "next/link";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {

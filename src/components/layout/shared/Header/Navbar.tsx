@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
-import Logo from "./Logo";
-import ActiveLink from "./ActiveLink";
+import Link from "next/link";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import ActiveLink from "./ActiveLink";
+import Logo from "./Logo";
 
 const navItems = [
   {

@@ -1,5 +1,5 @@
+import { ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
-import { Zap, ShieldCheck } from "lucide-react";
 
 interface LogoProps {
   className?: string;

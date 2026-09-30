@@ -1,13 +1,13 @@
 import {
   CreateUser,
   ForgotPassword,
-  GetMe,
   googleOAuth,
   LogOut,
   ResetPassword,
   UserLogin,
   VerifyEmail,
 } from "@/api/auth.api";
+import { GetMe } from "@/api/user.api";
 import { toast } from "@/components/ui/toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -78,14 +78,6 @@ export const UseResetPasswordHook = () => {
 export const UseGoogleOauthHook = () => {
   return useMutation({
     mutationFn: googleOAuth,
-  });
-};
-
-export const UsegetMeHook = () => {
-  return useQuery({
-    queryKey: ["user"],
-    queryFn: GetMe,
-    retry: false,
   });
 };
 

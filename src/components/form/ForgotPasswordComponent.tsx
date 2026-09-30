@@ -2,6 +2,8 @@
 import { UseForgotPassword } from "@/hooks/auth.hook";
 
 import { UseFormGetValues, UseFormTrigger } from "react-hook-form";
+
+import { Spinner } from "../ui/spinner";
 import { LoginPayload } from "@/types/auth/login";
 
 const ForgotPasswordComponent = ({
@@ -32,7 +34,14 @@ const ForgotPasswordComponent = ({
       disabled={isPending}
       className="text-sm font-medium text-blue-600 hover:underline dark:text-sky-400"
     >
-      {isPending ? "Sending..." : "Forgot password?"}
+      {isPending ? (
+        <span className="flex items-center gap-1">
+          {" "}
+          <Spinner /> Forgot password...
+        </span>
+      ) : (
+        "Forgot password?"
+      )}
     </button>
   );
 };

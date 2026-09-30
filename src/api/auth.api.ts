@@ -27,9 +27,6 @@ export const ResetPassword = (payload: ResetPasswordPayload) => {
 export const googleOAuth = (payload: { idToken: string }) => {
   return apiClient("/auth/google", { method: "POST", body: payload });
 };
-export const GetMe = () => {
-  return apiClient("/users/me", { method: "GET" });
-};
 
 export const LogOut = () => {
   return apiClient("/auth/logout", { method: "POST" });

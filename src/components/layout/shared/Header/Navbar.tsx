@@ -12,8 +12,8 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
-import { UsegetMeHook } from "@/hooks/auth.hook";
 import LogOutUser from "./LogOut";
+import { UsegetMeHook } from "@/hooks/profile.hook";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -31,6 +31,7 @@ const MENU_ITEMS = [
 export default function Navbar() {
   const pathname = usePathname();
   const { data, isLoading } = UsegetMeHook();
+  // console.log(data);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

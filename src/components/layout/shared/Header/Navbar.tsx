@@ -86,6 +86,9 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname?.startsWith(href);
 
+  // if (!data) {
+  //   return null;
+  // }
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-shadow duration-200 ${

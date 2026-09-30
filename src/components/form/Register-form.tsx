@@ -9,10 +9,17 @@ import { RegisterSchema } from "@/validation/form/auth/RegisterValidation";
 import { Button } from "../ui/button";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
+import { UserRegisterHook } from "@/hooks/auth.hook";
+import { email } from "zod";
+import { toast } from "../ui/toast";
+import { Spinner } from "../ui/spinner";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const { mutate: Register, isPending: isLoading } = UserRegisterHook();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,6 +30,37 @@ const RegisterForm = () => {
 
   const handleRegister = (value: RegisterPayload) => {
     console.log("Validation Successful! Data:", value);
+    // const payload = {
+    //   name: value.name,
+    //   email: value.email,
+    //   password: value.password,
+    // };
+    Register(value, {
+      onSuccess: (res) => {
+        if (!res.success) {
+          toast.add({
+            title: "Server Failure",
+            description: "Something went wrong. Please try again",
+            type: "error",
+          });
+        }
+        toast.add({
+          title: "6 digit Pin Submit",
+          description: " Please Check your Email and send to OTP.",
+          type: "success",
+        });
+
+        const params = new URLSearchParams({ email: value.email });
+        router.push(`/verify-email?${params.toString()}`);
+      },
+      onError: (err) => {
+        toast.add({
+          title: "Authorization failure",
+          description: err.message || "Something went wrong. Please try again",
+          type: "error",
+        });
+      },
+    });
   };
 
   return (
@@ -128,8 +166,15 @@ const RegisterForm = () => {
           </Field>
 
           <Field>
-            <Button type="submit" className="h-11 w-full">
-              Create account
+            <Button disabled={isLoading} type="submit" className="h-11 w-full">
+              {isLoading ? (
+                <>
+                  {" "}
+                  <Spinner /> Submiting...
+                </>
+              ) : (
+                "Create account"
+              )}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <FieldDescription className="text-center">

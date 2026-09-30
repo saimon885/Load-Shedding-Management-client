@@ -6,9 +6,6 @@ import React from "react";
 const LogOutUser = () => {
   const { mutate: logout, isPending } = UseLogOutHook();
   const handleLogout = () => {
-    // setIsDropdownOpen(false);
-    // setIsMobileMenuOpen(false);
-    // TODO: apni apnar logout logic ekhane boshan
     logout();
   };
   return (

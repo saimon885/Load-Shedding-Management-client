@@ -17,23 +17,65 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { otpSchema } from "@/validation/form/auth/Otp-validation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { UseVerifyEmailHook } from "@/hooks/auth.hook";
+import { toast } from "../ui/toast";
+import { Spinner } from "../ui/spinner";
 
 type OTPFormValues = z.infer<typeof otpSchema>;
 
 const OTP = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { mutate: Verify, isPending: isLoading } = UseVerifyEmailHook();
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<OTPFormValues>({
     resolver: zodResolver(otpSchema),
     defaultValues: {
       otp: "",
     },
   });
+  const email = searchParams.get("email") || "";
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    if (!email) {
+      router.push("/");
+    }
+  }, [email]);
 
   const onSubmit = (data: OTPFormValues) => {
-    console.log("Submitted OTP:", data.otp);
+    const payload = {
+      email,
+      otp: data.otp,
+    };
+    Verify(payload, {
+      onSuccess: (res) => {
+        if (!res.success) {
+          toast.add({
+            title: "Server Failure",
+            description: "Something went wrong. Please try again",
+            type: "error",
+          });
+        }
+        toast.add({
+          title: "Verification Successful",
+          description: "Welcome onboard",
+          type: "success",
+        });
+        router.push("/");
+      },
+      onError: (err) => {
+        toast.add({
+          title: "Verification failure",
+          description: err.message || "Something went wrong. Please try again",
+          type: "error",
+        });
+      },
+    });
   };
 
   const handleResend = () => {
@@ -80,10 +122,17 @@ const OTP = () => {
 
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isLoading}
           className="h-11 w-full font-medium"
         >
-          {isSubmitting ? "Verifying..." : "Verify Code"}
+          {isLoading ? (
+            <>
+              {" "}
+              <Spinner /> Verifying...
+            </>
+          ) : (
+            "Verify Code"
+          )}
         </Button>
 
         <FieldDescription className="text-center text-sm">

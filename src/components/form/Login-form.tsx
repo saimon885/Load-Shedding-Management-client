@@ -21,6 +21,7 @@ import { UseLoginHook } from "@/hooks/auth.hook";
 import { toast } from "../ui/toast";
 import { FaSpinner } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { Spinner } from "../ui/spinner";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -128,13 +129,13 @@ const LoginForm = () => {
           </Field>
 
           <Field>
-            <Button type="submit" className="h-10 w-full">
+            <Button disabled={isloading} type="submit" className="h-10 w-full">
               {isloading ? (
                 <>
-                  <FaSpinner /> submitting
+                  <Spinner /> submitting..
                 </>
               ) : (
-                "Submit"
+                "LogIn"
               )}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

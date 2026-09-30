@@ -1,4 +1,10 @@
-import { GetMe, LogOut, UserLogin } from "@/api/auth.api";
+import {
+  CreateUser,
+  GetMe,
+  LogOut,
+  UserLogin,
+  VerifyEmail,
+} from "@/api/auth.api";
 import { toast } from "@/components/ui/toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -7,6 +13,17 @@ export const UseLoginHook = () => {
     mutationFn: UserLogin,
   });
 };
+export const UserRegisterHook = () => {
+  return useMutation({
+    mutationFn: CreateUser,
+  });
+};
+export const UseVerifyEmailHook = () => {
+  return useMutation({
+    mutationFn: VerifyEmail,
+  });
+};
+
 export const UsegetMeHook = () => {
   return useQuery({
     queryKey: ["user"],
@@ -19,9 +36,9 @@ export const UseLogOutHook = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: LogOut, // apnar existing logout API function
+    mutationFn: LogOut,
     onSuccess: () => {
-      queryClient.setQueryData(["user"], null); // key ta UsegetMeHook er key er sathe mile thakte hobe
+      queryClient.setQueryData(["user"], null);
       toast.add({
         title: "Logged out",
         description: "You have been logged out successfully",

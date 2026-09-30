@@ -21,6 +21,7 @@ import { toast } from "../ui/toast";
 import { useRouter } from "next/navigation";
 import { Spinner } from "../ui/spinner";
 import ForgotPasswordComponent from "./ForgotPasswordComponent";
+import GoogleLoginResponse from "../google/GoogleLogin";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -60,10 +61,6 @@ const LoginForm = () => {
         });
       },
     });
-  };
-
-  const handleGoogleLogin = () => {
-    console.log("Google Login");
   };
 
   return (
@@ -150,14 +147,7 @@ const LoginForm = () => {
 
       <FieldSeparator className="mt-3">Or continue with</FieldSeparator>
 
-      <Button
-        type="button"
-        variant="outline"
-        className="my-3 h-10 w-full"
-        onClick={handleGoogleLogin}
-      >
-        Continue with Google
-      </Button>
+      <GoogleLoginResponse />
     </div>
   );
 };

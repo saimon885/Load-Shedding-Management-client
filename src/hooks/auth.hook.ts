@@ -2,6 +2,7 @@ import {
   CreateUser,
   ForgotPassword,
   GetMe,
+  googleOAuth,
   LogOut,
   ResetPassword,
   UserLogin,
@@ -72,6 +73,11 @@ export const UseForgotPassword = (options?: ForgotPasswordOptions) => {
 export const UseResetPasswordHook = () => {
   return useMutation({
     mutationFn: ResetPassword,
+  });
+};
+export const UseGoogleOauthHook = () => {
+  return useMutation({
+    mutationFn: googleOAuth,
   });
 };
 

@@ -16,27 +16,31 @@ import {
   FieldSeparator,
 } from "../ui/field";
 import { Input } from "../ui/input";
-import apiClient from "@/lib/ApiClient";
 import { UseLoginHook } from "@/hooks/auth.hook";
 import { toast } from "../ui/toast";
-import { FaSpinner } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { Spinner } from "../ui/spinner";
+import ForgotPasswordComponent from "./ForgotPasswordComponent";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const { mutate: login, isPending: isloading } = UseLoginHook();
+  const { mutate: login, isPending: isLoading } = UseLoginHook();
+
   const {
     register,
     handleSubmit,
+    trigger,
+    getValues,
     formState: { errors },
   } = useForm<LoginPayload>({
     resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "admin@gmail.com",
+    },
   });
 
   const handleLogin = (data: LoginPayload) => {
-    console.log("Login Data:", data);
     login(data, {
       onSuccess: (res) => {
         toast.add({
@@ -68,7 +72,6 @@ const LoginForm = () => {
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="email">Email address</FieldLabel>
-
             <Input
               id="email"
               type="email"
@@ -77,7 +80,6 @@ const LoginForm = () => {
               className="h-11"
               {...register("email")}
             />
-
             {errors.email && (
               <span className="mt-1 block text-xs text-red-500">
                 {errors.email.message}
@@ -88,15 +90,11 @@ const LoginForm = () => {
           <Field>
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor="password">Password</FieldLabel>
-
-              <Link
-                href="/forgot-password"
-                className="text-sm font-medium text-blue-600 hover:underline dark:text-sky-400"
-              >
-                Forgot password?
-              </Link>
+              <ForgotPasswordComponent
+                trigger={trigger}
+                getValues={getValues}
+              />
             </div>
-
             <div className="relative">
               <Input
                 id="password"
@@ -106,7 +104,6 @@ const LoginForm = () => {
                 className="h-11 pr-11"
                 {...register("password")}
               />
-
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
@@ -120,7 +117,6 @@ const LoginForm = () => {
                 )}
               </button>
             </div>
-
             {errors.password && (
               <span className="mt-1 block text-xs text-red-500">
                 {errors.password.message}
@@ -129,8 +125,8 @@ const LoginForm = () => {
           </Field>
 
           <Field>
-            <Button disabled={isloading} type="submit" className="h-10 w-full">
-              {isloading ? (
+            <Button disabled={isLoading} type="submit" className="h-10 w-full">
+              {isLoading ? (
                 <>
                   <Spinner /> submitting..
                 </>
@@ -139,7 +135,6 @@ const LoginForm = () => {
               )}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-
             <FieldDescription className="text-center">
               Don&apos;t have an account?{" "}
               <Link

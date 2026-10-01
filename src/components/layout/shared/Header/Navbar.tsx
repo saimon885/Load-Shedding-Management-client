@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import LogOutUser from "./LogOut";
 import { UsegetMeHook } from "@/hooks/profile.hook";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -141,7 +142,17 @@ export default function Navbar() {
                   className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F4C81]"
                 >
                   <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#0F4C81] dark:bg-sky-500 text-white text-sm font-semibold">
-                    {initial}
+                    {user?.profile ? (
+                      <Image
+                        src={user?.profile?.profileImage || ""}
+                        alt={user?.name || "Profile"}
+                        width={112}
+                        height={112}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <>{initial}</>
+                    )}
                   </span>
                   <ChevronDown
                     size={16}

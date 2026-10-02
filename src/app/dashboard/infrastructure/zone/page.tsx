@@ -1,7 +1,8 @@
 "use client";
 
-import AllZones from "@/components/dashboard/customer/zone/AllZones";
-import { Spinner } from "@/components/ui/spinner";
+import AllZones from "@/components/dashboard/zone/AllZones";
+import LoadingTable from "@/components/dashboard/zone/LoadingTable";
+
 import { UseGetZoneHook } from "@/hooks/zone.hook";
 import { Plus, Zap } from "lucide-react";
 import React from "react";
@@ -11,12 +12,7 @@ const ZonePage = () => {
   console.log(zones);
 
   if (isLoading || !zones) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center gap-2">
-        <Spinner />
-        <span className="text-sm text-muted-foreground">Loading zones...</span>
-      </div>
-    );
+    return <LoadingTable />;
   }
 
   const zoneList = zones?.data ?? [];

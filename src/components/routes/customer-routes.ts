@@ -53,7 +53,7 @@ export const customerRoutes = [
     items: [
       {
         title: "Zones",
-        url: "/dashboard/infrastructure/zones",
+        url: "/dashboard/customer/zone",
         icon: MapPin,
       },
       {

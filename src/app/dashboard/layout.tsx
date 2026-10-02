@@ -1,7 +1,13 @@
 import AuthGuard from "@/components/auth/AuthGuard";
+import DashboardShell from "@/components/dashboard/dashboard-shell";
 import React, { ReactNode } from "react";
 
-const layout = ({ children }: { children: ReactNode }) => {
-  return <AuthGuard> {children}</AuthGuard>;
+const DashboardLayout = ({ children }: { children: ReactNode }) => {
+  return (
+    <AuthGuard>
+      <DashboardShell>{children}</DashboardShell>
+    </AuthGuard>
+  );
 };
-export default layout;
+
+export default DashboardLayout;

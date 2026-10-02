@@ -1,3 +1,5 @@
+"use client";
+
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -5,16 +7,21 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
-import { UserRole } from "@/types/user/User.role.type";
 import { DashboardSidebar } from "./dashboard-sidebar";
-
+import { UsegetMeHook } from "@/hooks/profile.hook";
 export default function DashboardShell({
   children,
-  role,
 }: {
   children: ReactNode;
-  role: UserRole;
 }) {
+  const { data, isLoading } = UsegetMeHook();
+
+  const role = data?.data?.role;
+
+  if (isLoading || !role) {
+    return null;
+  }
+
   return (
     <SidebarProvider>
       <DashboardSidebar role={role} />

@@ -8,8 +8,8 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
+  SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { UserRole } from "@/types/user/User.role.type";
@@ -17,22 +17,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../layout/shared/Header/Logo";
 import { SidebarItems } from "@/types/dashboard/sidebar-types";
+
 import { adminRoutes } from "../routes/admin-routes";
 import { customerRoutes } from "../routes/customer-routes";
+import { commonRoutes } from "../routes/common-routes";
 
-
-const sidebarRoutes: Partial<Record<UserRole, SidebarItems[]>> = {
+const roleRoutes: Partial<Record<UserRole, SidebarItems[]>> = {
   ADMIN: adminRoutes,
-  ZONE_MANAGER: adminRoutes,
-  POWER_OPERATOR: adminRoutes,
-  TECHNICIAN: adminRoutes,
+  ZONE_MANAGER: customerRoutes,
+  POWER_OPERATOR: customerRoutes,
+  TECHNICIAN: customerRoutes,
   CUSTOMER: customerRoutes,
 };
 
 export function DashboardSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
 
-  const routes: SidebarItems[] = sidebarRoutes[role] ?? [];
+  // const roleSpecificRoutes = roleRoutes[role] ?? [];
+
+  // const routes: SidebarItems[] = [...commonRoutes, ...roleSpecificRoutes];
+  const routes: SidebarItems[] = [...commonRoutes];
+
   return (
     <Sidebar
       style={

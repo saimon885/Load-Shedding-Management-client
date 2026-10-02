@@ -1,24 +1,24 @@
 "use client";
-import GetAllsubstation from "@/components/dashboard/substation/GetAllsubstation";
+
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
-import { Button } from "@/components/ui/button";
-import { getZoneWiseSubstations } from "@/hooks/zone.hook";
-import { Plus, Zap } from "lucide-react";
+import { getFeederWiseAreas } from "@/hooks/zone.hook";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import { Plus, Zap } from "lucide-react";
+import GetAllAreas from "@/components/dashboard/areas/GetAllAreas";
+import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
+// import GetAllFeeders from "@/components/dashboard/feeders/GetAllFeeders";
 
-const substation = () => {
+const area = () => {
   const searchParams = useSearchParams();
-  const zoneId = searchParams.get("zoneId") || "";
-
-  const { data: substationList, isLoading } = getZoneWiseSubstations(zoneId);
-  if (isLoading || !substationList) {
+  const feederId = searchParams.get("feederId") || "";
+  const { data: areas, isLoading } = getFeederWiseAreas(feederId);
+  if (isLoading || !areas) {
     return <LoadingTable />;
   }
 
-  const substation = substationList?.data ?? [];
-  console.log(substation);
+  const area = areas?.data ?? [];
+  console.log(area);
   return (
     <section className="w-full space-y-6 p-4 sm:p-6 lg:p-8">
       <Button onClick={() => window.history.back()}>
@@ -30,12 +30,12 @@ const substation = () => {
             <Zap className="size-5" />
 
             <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-              substations
+              Areas
             </h1>
           </div>
 
           <p className="mt-1 text-sm text-muted-foreground">
-            Manage and monitor their substations.
+            Manage and monitor their Areas.
           </p>
         </div>
 
@@ -44,13 +44,13 @@ const substation = () => {
           className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
         >
           <Plus className="size-4" />
-          Add substation
+          Add Areas
         </button>
       </div>
 
-      <GetAllsubstation substations={substation} />
+      <GetAllAreas areas={area} />
     </section>
   );
 };
 
-export default substation;
+export default area;

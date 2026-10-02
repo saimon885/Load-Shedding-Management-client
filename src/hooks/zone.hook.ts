@@ -1,4 +1,4 @@
-import { GetFeedersBySubstation, GetSingleZone, GetZone } from "@/api/zone.api";
+import { GetAreasByFeeder, GetFeedersBySubstation, GetSingleZone, GetZone } from "@/api/zone.api";
 import { useQuery } from "@tanstack/react-query";
 
 export const UseGetZoneHook = () => {
@@ -19,6 +19,13 @@ export const getSubstationWiseFeeders = (id: string) => {
   return useQuery({
     queryKey: ["feeders", id],
     queryFn: () => GetFeedersBySubstation(id),
+    retry: false,
+  });
+};
+export const getFeederWiseAreas = (id: string) => {
+  return useQuery({
+    queryKey: ["areas", id],
+    queryFn: () => GetAreasByFeeder(id),
     retry: false,
   });
 };

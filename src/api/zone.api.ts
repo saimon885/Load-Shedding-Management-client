@@ -12,6 +12,9 @@ export const GetSingleZone = (id: string) => {
 export const GetFeedersBySubstation = (id: string) => {
   return apiClient(`/feeders/get/${id}`, { method: "GET" });
 };
+export const GetAreasByFeeder = (id: string) => {
+  return apiClient(`/areas/get/${id}`, { method: "GET" });
+};
 export const UpdateZone = (payload) => {
   return apiClient(`/zones/update`, { method: "PATCH", body: payload });
 };

@@ -13,29 +13,9 @@ import {
 } from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-
-interface area {
-  id: string;
-  name: string;
-  code: string;
-  description: string;
-  status: string;
-  priority: string;
-}
-
-interface AllAreasProps {
-  areas: area[];
-}
+import { AllAreasProps } from "@/types/dashboard/infrastructure";
 
 const GetAllAreas = ({ areas }: AllAreasProps) => {
-  const router = useRouter();
-  //   const handlegetAreas = (areaId: string) => {
-  //     const areas = new URLSearchParams({ areaId: areaId });
-  //     router.push(
-  //       `/dashboard/infrastructure/zone/substation/areas/area?${areas.toString()}`,
-  //     );
-  //   };
   return (
     <div className="w-full overflow-hidden rounded-xl border bg-card">
       <Table>

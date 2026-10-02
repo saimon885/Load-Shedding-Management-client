@@ -14,21 +14,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { AllFeedersProps } from "@/types/dashboard/infrastructure";
 
-interface feeder {
-  id: string;
-  name: string;
-  code: string;
-  capacity: number;
-  status: string;
-  areas: {
-    id: string;
-  }[];
-}
 
-interface AllFeedersProps {
-  feeders: feeder[];
-}
 
 const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
   const router = useRouter();

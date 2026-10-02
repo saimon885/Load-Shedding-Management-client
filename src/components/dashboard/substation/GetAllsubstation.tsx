@@ -14,21 +14,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { AllSubstationsProps } from "@/types/dashboard/infrastructure";
 
-interface substation {
-  id: string;
-  name: string;
-  code: string;
-  location: string;
-  status: string;
-  feeder: {
-    id: string;
-  }[];
-}
-
-interface AllSubstationsProps {
-  substations: substation[];
-}
 
 const GetAllsubstation = ({ substations }: AllSubstationsProps) => {
   const router = useRouter();

@@ -14,21 +14,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { AllZonesProps } from "@/types/dashboard/infrastructure";
 
-interface Zone {
-  id: string;
-  name: string;
-  code: string;
-  description: string;
-  status: string;
-  substation: {
-    id: string;
-  }[];
-}
 
-interface AllZonesProps {
-  zones: Zone[];
-}
 
 const AllZones = ({ zones }: AllZonesProps) => {
   const router = useRouter();

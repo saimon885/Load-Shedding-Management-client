@@ -1,5 +1,6 @@
 "use client";
 
+import Can from "@/components/auth/RoleCan";
 import AllZones from "@/components/dashboard/zone/AllZones";
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
 
@@ -34,13 +35,15 @@ const ZonePage = () => {
           </p>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
-        >
-          <Plus className="size-4" />
-          Add Zone
-        </button>
+        <Can permission="zone:create">
+          <button
+            type="button"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
+          >
+            <Plus className="size-4" />
+            Add Zone
+          </button>
+        </Can>
       </div>
 
       <AllZones zones={zoneList} />

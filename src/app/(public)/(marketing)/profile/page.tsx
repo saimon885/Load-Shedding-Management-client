@@ -6,7 +6,7 @@ import { UsegetMeHook } from "@/hooks/profile.hook";
 
 export default function ProfilePage() {
   const { data, isLoading, isError } = UsegetMeHook();
-  console.log(data?.data);
+
 
   if (isLoading) {
     return (

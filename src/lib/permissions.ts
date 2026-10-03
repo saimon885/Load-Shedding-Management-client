@@ -9,6 +9,7 @@ export const permissions: Record<
     substation: { view: true, create: true, update: true, delete: true },
     feeder: { view: true, create: true, update: true, delete: true },
     area: { view: true, create: true, update: true, delete: true },
+    schedule: { view: false, create: true, update: false, delete: false },
   },
   ZONE_MANAGER: {
     zone: { view: true, create: true, update: true, delete: true },
@@ -33,5 +34,7 @@ export const permissions: Record<
     substation: { view: true, create: false, update: false, delete: false },
     feeder: { view: true, create: false, update: false, delete: false },
     area: { view: true, create: false, update: false, delete: false },
+    service: { view: false, create: true, update: false, delete: false },
+    outage_report: { view: false, create: true, update: false, delete: false },
   },
 };

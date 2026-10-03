@@ -11,7 +11,7 @@ import React from "react";
 
 const ZonePage = () => {
   const { data: zones, isLoading } = UseGetZoneHook();
-  console.log(zones);
+ 
 
   if (isLoading || !zones) {
     return <LoadingTable />;

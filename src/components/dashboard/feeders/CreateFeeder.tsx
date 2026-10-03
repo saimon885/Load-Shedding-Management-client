@@ -41,7 +41,7 @@ export function AddNewFeeder({ substationId }: { substationId: string }) {
 
   const onSubmit = async (data: feederFormValues) => {
     try {
-      console.log("Submitted Data:", { substationId, ...data });
+      
       createFeeder(
         { substationId, ...data },
         {

@@ -91,7 +91,7 @@ export default function ProfileEditForm({
 
       UpdateProfile(formData, {
         onSuccess: (response) => {
-          console.log("Profile updated:", response);
+         
 
           const imagePreview = image
             ? URL.createObjectURL(image)
@@ -111,7 +111,7 @@ export default function ProfileEditForm({
         },
 
         onError: (error) => {
-          console.error("Profile update failed:", error);
+       
 
           toast.add({
             title: "Update failure",
@@ -122,7 +122,7 @@ export default function ProfileEditForm({
         },
       });
     } catch (error) {
-      console.error("Profile update failed:", error);
+      console.log("Profile update failed:");
     }
   };
 

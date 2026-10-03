@@ -29,7 +29,7 @@ const RegisterForm = () => {
   });
 
   const handleRegister = (value: RegisterPayload) => {
-    console.log("Validation Successful! Data:", value);
+ 
     // const payload = {
     //   name: value.name,
     //   email: value.email,

@@ -21,7 +21,10 @@ type Permission =
   | "area:view"
   | "area:create"
   | "area:update"
-  | "area:delete";
+  | "area:delete"
+  | "service:create"
+  | "outage_report:create"
+  | "schedule:create";
 
 interface CanProps {
   permission: Permission;

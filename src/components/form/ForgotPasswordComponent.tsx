@@ -16,14 +16,14 @@ const ForgotPasswordComponent = ({
   const { mutate: Forgot, isPending } = UseForgotPassword();
 
   const handleForgotPassword = async () => {
-    console.log("buttton click");
+
     const isEmailValid = await trigger("email");
     if (!isEmailValid) return;
 
     const emailData = getValues("email");
 
     const payload = { email: emailData };
-    console.log(payload);
+  
 
     Forgot(payload);
   };

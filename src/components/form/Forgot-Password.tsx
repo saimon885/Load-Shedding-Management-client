@@ -34,13 +34,13 @@ const ForgotPasswordHandle = () => {
     }
   }, [email]);
   const onSubmit = (data: ForgotPasswordFormData) => {
-    console.log(data);
+   
     const payload = {
       email: email,
       newPassword: data.newPassword,
       otp: data.otp,
     };
-    console.log(payload);
+
     ResetPass(payload, {
       onSuccess: (res) => {
         toast.add({

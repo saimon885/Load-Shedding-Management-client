@@ -13,45 +13,43 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Wrench } from "lucide-react";
+import { AlertTriangle, Wrench } from "lucide-react";
 import { useState } from "react";
-import { serviceSchema } from "@/validation/form/dashboard/service";
-import { CreateServieHook } from "@/hooks/service";
+
+import { OutageReportSchema } from "@/validation/form/dashboard/outageReport";
+import { CreateOutageReportHook } from "@/hooks/outage-report";
 import { toast } from "@/components/ui/toast";
 
-type ServiceFormValues = z.infer<typeof serviceSchema>;
+type OutageReportFormValues = z.infer<typeof OutageReportSchema>;
 
 type Props = {
   areaId: string;
-  feederId: string;
 };
 
-const DispatchService = ({ areaId, feederId }: Props) => {
+const OutageReport = ({ areaId }: Props) => {
   const [open, setOpen] = useState(false);
-  const { mutate: createService, isPending } = CreateServieHook();
+  const { mutate: outageReport, isPending } = CreateOutageReportHook();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ServiceFormValues>({
-    resolver: zodResolver(serviceSchema),
+  } = useForm<OutageReportFormValues>({
+    resolver: zodResolver(OutageReportSchema),
     defaultValues: {
-      type: "TECHNICAL_SERVICE",
       description: "",
       areaId: areaId,
-      feederId: feederId,
     },
   });
 
-  const onSubmit = async (data: ServiceFormValues) => {
+  const onSubmit = async (data: OutageReportFormValues) => {
     try {
- 
-      createService(data, {
+      outageReport(data, {
         onSuccess: (res) => {
           toast.add({
-            title: "Service Created",
-            description: "The service has been created successfully.",
+            title: "OutageReport Created",
+            description:
+              res.message || "The Outage Report has been created successfully.",
             type: "success",
           });
           setOpen(false);
@@ -59,10 +57,9 @@ const DispatchService = ({ areaId, feederId }: Props) => {
         onError: (err) => {
           toast.add({
             title: "Error",
-            description: err.message || "Failed to create service.",
+            description: err.message || "Failed to create Outage Report.",
             type: "error",
           });
-          setOpen(false);
         },
       });
       reset();
@@ -82,43 +79,24 @@ const DispatchService = ({ areaId, feederId }: Props) => {
       <DialogTrigger
         render={
           <Button
-            variant="secondary"
-            className="w-full flex items-center justify-center gap-2 text-xs font-semibold h-10 shadow-xs cursor-pointer"
+            variant="outline"
+            className="w-full flex items-center justify-center gap-2 text-xs font-semibold h-10 shadow-xs cursor-pointer border-amber-200 hover:bg-amber-50 hover:text-amber-700 dark:border-amber-900/50 dark:hover:bg-amber-950/30"
           >
-            <Wrench className="size-4 shrink-0" />
-            Dispatch Service
+            <AlertTriangle className="size-4 shrink-0 text-amber-500" />
+            File Outage Report Create
           </Button>
         }
       />
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Dispatch Service</DialogTitle>
+          <DialogTitle>File Outage Report</DialogTitle>
           <DialogDescription>
-            Select a service category and add execution descriptions.
+            Select a execution descriptions.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="type" className="text-sm font-medium">
-              Service Type
-            </label>
-            <select
-              id="type"
-              className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-              {...register("type")}
-            >
-              <option value="NEW_CONNECTION">New Connection</option>
-              <option value="METER_INSTALLATION">Meter Installation</option>
-              <option value="METER_REPLACEMENT">Meter Replacement</option>
-              <option value="TECHNICAL_SERVICE">Technical Service</option>
-            </select>
-            {errors.type && (
-              <p className="text-xs text-red-500">{errors.type.message}</p>
-            )}
-          </div>
-
           <div className="flex flex-col gap-1.5">
             <label htmlFor="description" className="text-sm font-medium">
               Description
@@ -154,4 +132,4 @@ const DispatchService = ({ areaId, feederId }: Props) => {
   );
 };
 
-export default DispatchService;
+export default OutageReport;

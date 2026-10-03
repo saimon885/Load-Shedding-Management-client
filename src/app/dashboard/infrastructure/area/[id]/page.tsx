@@ -15,6 +15,9 @@ import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
 import DispatchService from "@/components/dashboard/areas/DispatchService";
+import Can from "@/components/auth/RoleCan";
+import OutageReport from "@/components/dashboard/areas/OutageReport";
+import SheduleOutage from "@/components/dashboard/areas/SheduleOutage";
 
 interface AreaDetailsProps {
   params: Promise<{ id: string }> | { id: string };
@@ -140,26 +143,16 @@ const AreaDetails = ({ params }: AreaDetailsProps) => {
               <ShieldAlert className="size-4 shrink-0" />
               Trigger Outage Emergency
             </Button>
+            <Can permission="outage_report:create">
+              <OutageReport areaId={area.id} />
+            </Can>
+            <Can permission="schedule:create">
+              <SheduleOutage feederId={area.feederId} areaId={area.id} />
+            </Can>
 
-            <Button
-              variant="outline"
-              className="w-full flex items-center justify-center gap-2 text-xs font-semibold h-10 shadow-xs cursor-pointer border-amber-200 hover:bg-amber-50 hover:text-amber-700 dark:border-amber-900/50 dark:hover:bg-amber-950/30"
-              onClick={() => console.log("Report Outage for:", area.id)}
-            >
-              <AlertTriangle className="size-4 shrink-0 text-amber-500" />
-              File Outage Report
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full flex items-center justify-center gap-2 text-xs font-semibold h-10 shadow-xs cursor-pointer"
-              onClick={() => console.log("Create Schedule for:", area.id)}
-            >
-              <Calendar className="size-4 shrink-0 text-primary" />
-              Plan Maintenance Schedule
-            </Button>
-
-            <DispatchService areaId={area.id} feederId={area.feederId} />
+            <Can permission="service:create">
+              <DispatchService areaId={area.id} feederId={area.feederId} />
+            </Can>
           </div>
         </div>
       </div>

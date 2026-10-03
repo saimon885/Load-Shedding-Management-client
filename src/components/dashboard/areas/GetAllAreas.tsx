@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Building2, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { Building2, Eye } from "lucide-react";
 
 import {
   Table,
@@ -79,10 +79,15 @@ const GetAllAreas = ({ areas }: AllAreasProps) => {
                   </span>
                 </TableCell>
 
-                {/* <TableCell>
-//onek code likhte hove
-                  
-                </TableCell> */}
+                <TableCell>
+                  <Link
+                    href={`/dashboard/infrastructure/area/${area.id}`}
+                    className="inline-flex items-center gap-2 text-xs h-8 text-muted-foreground hover:text-foreground cursor-pointer font-medium"
+                  >
+                    <Eye className="size-4" />
+                    View Areas
+                  </Link>
+                </TableCell>
               </TableRow>
             ))
           ) : (

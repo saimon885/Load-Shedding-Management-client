@@ -5,22 +5,22 @@ import React, { ReactNode, useEffect } from "react";
 import AuthLoading from "./Auth-Loading";
 
 const AuthGuard = ({ children }: { children: ReactNode }) => {
-  const { data, isPending, isError } = UsegetMeHook();
+  const { data, isLoading, isError } = UsegetMeHook();
   const router = useRouter();
 
   const user = data?.data;
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (isPending) {
+    if (isLoading) {
       return;
     }
     if (isError || !user) {
       router.replace("/login");
     }
-  }, [isPending, isError, user]);
+  }, [isLoading, isError, user]);
 
-  if (isPending) {
+  if (isLoading) {
     return <AuthLoading />;
   }
 

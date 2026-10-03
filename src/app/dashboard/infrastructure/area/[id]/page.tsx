@@ -18,6 +18,7 @@ import DispatchService from "@/components/dashboard/areas/DispatchService";
 import Can from "@/components/auth/RoleCan";
 import OutageReport from "@/components/dashboard/areas/OutageReport";
 import SheduleOutage from "@/components/dashboard/areas/SheduleOutage";
+import CreageOutage from "@/components/dashboard/areas/CrateOutage";
 
 interface AreaDetailsProps {
   params: Promise<{ id: string }> | { id: string };
@@ -135,14 +136,9 @@ const AreaDetails = ({ params }: AreaDetailsProps) => {
           </h3>
 
           <div className="flex flex-col gap-2.5">
-            <Button
-              variant="default"
-              className="w-full flex items-center justify-center gap-2 text-xs font-semibold h-10 shadow-xs cursor-pointer bg-destructive hover:bg-destructive/90 text-destructive-foreground"
-              onClick={() => console.log("Create Outage for:", area.id)}
-            >
-              <ShieldAlert className="size-4 shrink-0" />
-              Trigger Outage Emergency
-            </Button>
+            <Can permission="outage:create">
+              <CreageOutage feederId={area.feederId} areaId={area.id} />
+            </Can>
             <Can permission="outage_report:create">
               <OutageReport areaId={area.id} />
             </Can>

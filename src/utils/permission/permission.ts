@@ -12,5 +12,6 @@ export type Resource =
   | "service"
   | "outage_report"
   | "schedule"
+  | "outage"
   | string;
 export type Action = "view" | "create" | "update" | "delete";

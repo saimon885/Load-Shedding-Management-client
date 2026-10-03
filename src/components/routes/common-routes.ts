@@ -21,7 +21,17 @@ export const commonRoutes = [
       },
       {
         title: "Substations",
-        url: "/dashboard/infrastructure/zone/substation",
+        url: "/dashboard/infrastructure/substation",
+        icon: Building2,
+      },
+      {
+        title: "Feeders",
+        url: "/dashboard/infrastructure/feeders",
+        icon: Building2,
+      },
+      {
+        title: "Area",
+        url: "/dashboard/infrastructure/area",
         icon: Building2,
       },
     ],

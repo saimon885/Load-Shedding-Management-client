@@ -1,5 +1,11 @@
-import { GetSingleZone } from "@/api/substation";
-import { useQuery } from "@tanstack/react-query";
+import { CreateSubstation, GetSingleZone } from "@/api/substation";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+export const CreateSubstationHook = () => {
+  return useMutation({
+    mutationFn: CreateSubstation,
+  });
+};
 
 export const getZoneWiseSubstations = (id: string) => {
   return useQuery({

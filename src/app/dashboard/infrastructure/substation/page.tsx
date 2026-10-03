@@ -1,22 +1,21 @@
 "use client";
+import Can from "@/components/auth/RoleCan";
+import { AddNewSubstation } from "@/components/dashboard/substation/CreateSubstation";
 import GetAllsubstation from "@/components/dashboard/substation/GetAllsubstation";
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
+import ZoneNotFound from "@/components/dashboard/zone/ZoneNotFound";
 import { Button } from "@/components/ui/button";
 import { getZoneWiseSubstations } from "@/hooks/substation";
-import { Plus, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import React from "react";
 import { BiLeftArrow } from "react-icons/bi";
 
 const substation = () => {
   const searchParams = useSearchParams();
+
   const zoneId = searchParams.get("zoneId") || "";
   if (!zoneId) {
-    return (
-      <div className="w-full h-screen flex justify-center items-center">
-        <p className="text-4xl text-destructive">ZoneId Not Found</p>
-      </div>
-    );
+    return <ZoneNotFound />;
   }
 
   const { data: substationList, isLoading } = getZoneWiseSubstations(zoneId);
@@ -45,14 +44,9 @@ const substation = () => {
             Manage and monitor their substations.
           </p>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
-        >
-          <Plus className="size-4" />
-          Add substation
-        </button>
+        <Can permission="substation:create">
+          <AddNewSubstation zoneId={zoneId} />
+        </Can>
       </div>
 
       <GetAllsubstation substations={substation} />

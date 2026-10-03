@@ -8,10 +8,16 @@ import GetAllAreas from "@/components/dashboard/areas/GetAllAreas";
 import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
 import { getFeederWiseAreas } from "@/hooks/area";
+import { AddNewArea } from "@/components/dashboard/areas/AddNewArea";
+import { FeederNotFound } from "@/components/dashboard/feeders/FeedersNotFound";
+import Can from "@/components/auth/RoleCan";
 
 const area = () => {
   const searchParams = useSearchParams();
   const feederId = searchParams.get("feederId") || "";
+  if (!feederId) {
+    return <FeederNotFound />;
+  }
   const { data: areas, isLoading } = getFeederWiseAreas(feederId);
   if (isLoading || !areas) {
     return <LoadingTable />;
@@ -39,13 +45,9 @@ const area = () => {
           </p>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
-        >
-          <Plus className="size-4" />
-          Add Areas
-        </button>
+        <Can permission="area:create">
+          <AddNewArea feederId={feederId} />
+        </Can>
       </div>
 
       <GetAllAreas areas={area} />

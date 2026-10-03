@@ -8,10 +8,16 @@ import GetAllFeeders from "@/components/dashboard/feeders/GetAllFeeders";
 import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
 import { getSubstationWiseFeeders } from "@/hooks/feeders";
+import { AddNewFeeder } from "@/components/dashboard/feeders/CreateFeeder";
+import { SubstationNotFound } from "@/components/dashboard/substation/SubstationNotFound";
+import Can from "@/components/auth/RoleCan";
 
 const feeders = () => {
   const searchParams = useSearchParams();
   const substationId = searchParams.get("substationId") || "";
+  if (!substationId) {
+    return <SubstationNotFound />;
+  }
   const { data: feedersList, isLoading } =
     getSubstationWiseFeeders(substationId);
   if (isLoading || !feedersList) {
@@ -40,14 +46,9 @@ const feeders = () => {
             Manage and monitor their Feeders.
           </p>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
-        >
-          <Plus className="size-4" />
-          Add Feeders
-        </button>
+        <Can permission="feeder:create">
+          <AddNewFeeder substationId={substationId} />
+        </Can>
       </div>
 
       <GetAllFeeders feeders={feeders} />

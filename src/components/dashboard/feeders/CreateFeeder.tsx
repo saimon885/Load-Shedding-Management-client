@@ -19,47 +19,47 @@ import { Plus } from "lucide-react";
 import { toast } from "@/components/ui/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { CreateAreaHook } from "@/hooks/area";
-import { areaSchema } from "@/types/dashboard/infrastructure/ZSFA";
+import { CreateFeederHook } from "@/hooks/feeders";
+import { feederSchema } from "@/types/dashboard/infrastructure/ZSFA";
 
 
-type AreaFormValues = z.infer<typeof areaSchema>;
+type feederFormValues = z.infer<typeof feederSchema>;
 
-export function AddNewArea({ feederId }: { feederId: string }) {
+export function AddNewFeeder({ substationId }: { substationId: string }) {
   const [open, setOpen] = useState(false);
-  const { mutate: createArea, isPending } = CreateAreaHook();
+  const { mutate: createFeeder, isPending } = CreateFeederHook();
   const queryclient = useQueryClient();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AreaFormValues>({
-    resolver: zodResolver(areaSchema),
-    defaultValues: { name: "", code: "", description: "" },
+  } = useForm<feederFormValues>({
+    resolver: zodResolver(feederSchema),
+    defaultValues: { name: "", code: "", capacity: 0 },
   });
 
-  const onSubmit = async (data: AreaFormValues) => {
+  const onSubmit = async (data: feederFormValues) => {
     try {
-      createArea(
-        { feederId, ...data },
+      console.log("Submitted Data:", { substationId, ...data });
+      createFeeder(
+        { substationId, ...data },
         {
           onSuccess: (res) => {
             toast.add({
-              title: "Area Created",
-              description: "The Area has been created successfully.",
+              title: "Feeder Created",
+              description: "The feeder has been created successfully.",
               type: "success",
             });
             queryclient.invalidateQueries({
-              queryKey: ["areas", feederId],
+              queryKey: ["feeders", substationId],
             });
             setOpen(false);
           },
           onError: (err) => {
             toast.add({
               title: "Error",
-              description: err.message || "Failed to create area.",
+              description: err.message || "Failed to create feeder.",
               type: "error",
             });
           },
@@ -79,23 +79,23 @@ export function AddNewArea({ feederId }: { feederId: string }) {
             type="button"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
           >
-            <Plus className="size-4" /> Add Area
+            <Plus className="size-4" /> Add Feeder
           </Button>
         }
       ></DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add New Area</DialogTitle>
+          <DialogTitle>Add New Feeder</DialogTitle>
           <DialogDescription>
-            Enter the details for the new area.
+            Enter the details for the new feeder.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="name" className="text-sm font-medium">
-              Area Name
+              Feeder Name
             </label>
             <Input
               id="name"
@@ -109,7 +109,7 @@ export function AddNewArea({ feederId }: { feederId: string }) {
 
           <div className="flex flex-col gap-1.5">
             <label htmlFor="code" className="text-sm font-medium">
-              Area Code
+              feeder Code
             </label>
             <Input
               id="code"
@@ -122,18 +122,17 @@ export function AddNewArea({ feederId }: { feederId: string }) {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="description" className="text-sm font-medium">
-              Description
+            <label htmlFor="capacity" className="text-sm font-medium">
+              Feeder Capacity (MW)
             </label>
-            <Textarea
-              id="description"
-              placeholder="e.g. Central area serving downtown"
-              {...register("description")}
+            <Input
+              id="capacity"
+              type="number"
+              placeholder="e.g. 10.5"
+              {...register("capacity", { valueAsNumber: true })}
             />
-            {errors.description && (
-              <p className="text-xs text-red-500">
-                {errors.description.message}
-              </p>
+            {errors.capacity && (
+              <p className="text-xs text-red-500">{errors.capacity.message}</p>
             )}
           </div>
 

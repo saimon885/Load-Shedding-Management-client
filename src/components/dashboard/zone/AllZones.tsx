@@ -20,9 +20,7 @@ const AllZones = ({ zones }: AllZonesProps) => {
 
   const handlegetSubstation = (zoneId: string) => {
     const params = new URLSearchParams({ zoneId: zoneId });
-    router.push(
-      `/dashboard/infrastructure/zone/substation?${params.toString()}`,
-    );
+    router.push(`/dashboard/infrastructure/substation?${params.toString()}`);
   };
 
   return (

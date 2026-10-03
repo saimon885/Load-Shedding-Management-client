@@ -13,53 +13,49 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-
+import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
-
+import { CreateSubstationHook } from "@/hooks/substation";
 import { toast } from "@/components/ui/toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { CreateAreaHook } from "@/hooks/area";
-import { areaSchema } from "@/types/dashboard/infrastructure/ZSFA";
+import { substationSchema } from "@/types/dashboard/infrastructure/ZSFA";
 
+type SubstationFormValues = z.infer<typeof substationSchema>;
 
-type AreaFormValues = z.infer<typeof areaSchema>;
-
-export function AddNewArea({ feederId }: { feederId: string }) {
+export function AddNewSubstation({ zoneId }: { zoneId: string }) {
   const [open, setOpen] = useState(false);
-  const { mutate: createArea, isPending } = CreateAreaHook();
+  const { mutate: createSubstation, isPending } = CreateSubstationHook();
   const queryclient = useQueryClient();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AreaFormValues>({
-    resolver: zodResolver(areaSchema),
-    defaultValues: { name: "", code: "", description: "" },
+  } = useForm<SubstationFormValues>({
+    resolver: zodResolver(substationSchema),
+    defaultValues: { name: "", code: "", location: "" },
   });
 
-  const onSubmit = async (data: AreaFormValues) => {
+  const onSubmit = async (data: SubstationFormValues) => {
     try {
-      createArea(
-        { feederId, ...data },
+      console.log("Submitted Data:", { zoneId, ...data });
+      createSubstation(
+        { zoneId, ...data },
         {
           onSuccess: (res) => {
             toast.add({
-              title: "Area Created",
-              description: "The Area has been created successfully.",
+              title: "Substation Created",
+              description: "The substation has been created successfully.",
               type: "success",
             });
-            queryclient.invalidateQueries({
-              queryKey: ["areas", feederId],
-            });
+            queryclient.invalidateQueries({ queryKey: ["substation", zoneId] });
             setOpen(false);
           },
           onError: (err) => {
             toast.add({
               title: "Error",
-              description: err.message || "Failed to create area.",
+              description: err.message || "Failed to create substation.",
               type: "error",
             });
           },
@@ -79,23 +75,23 @@ export function AddNewArea({ feederId }: { feederId: string }) {
             type="button"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 sm:w-auto"
           >
-            <Plus className="size-4" /> Add Area
+            <Plus className="size-4" /> Add Substation
           </Button>
         }
       ></DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add New Area</DialogTitle>
+          <DialogTitle>Add New Substation</DialogTitle>
           <DialogDescription>
-            Enter the details for the new area.
+            Enter the details for the new substation.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="name" className="text-sm font-medium">
-              Area Name
+              Substation Name
             </label>
             <Input
               id="name"
@@ -109,7 +105,7 @@ export function AddNewArea({ feederId }: { feederId: string }) {
 
           <div className="flex flex-col gap-1.5">
             <label htmlFor="code" className="text-sm font-medium">
-              Area Code
+              Substation Code
             </label>
             <Input
               id="code"
@@ -122,18 +118,17 @@ export function AddNewArea({ feederId }: { feederId: string }) {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="description" className="text-sm font-medium">
-              Description
+            <label htmlFor="location" className="text-sm font-medium">
+              Location
             </label>
             <Textarea
-              id="description"
-              placeholder="e.g. Central area serving downtown"
-              {...register("description")}
+              id="location"
+              placeholder="e.g. Chandpur distribution zone"
+              rows={3}
+              {...register("location")}
             />
-            {errors.description && (
-              <p className="text-xs text-red-500">
-                {errors.description.message}
-              </p>
+            {errors.location && (
+              <p className="text-xs text-red-500">{errors.location.message}</p>
             )}
           </div>
 

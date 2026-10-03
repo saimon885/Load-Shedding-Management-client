@@ -79,52 +79,10 @@ const GetAllAreas = ({ areas }: AllAreasProps) => {
                   </span>
                 </TableCell>
 
-                <TableCell>
-                  <div className="flex items-center justify-end gap-1">
-                    <Button
-                      //   onClick={() => handlegetAreas(area.id)}
-                      variant="ghost"
-                      size="icon"
-                      className="size-8"
-                      title="View"
-                    >
-                      <Eye className="size-4" />
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8"
-                      title="Edit"
-                      onClick={() => {
-                        console.log("Update area:", area.id);
-                      }}
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8 text-destructive hover:text-destructive"
-                      title="Delete"
-                      onClick={() => {
-                        console.log("Delete area:", area.id);
-                      }}
-                    >
-                      <Trash2 className="size-4" />
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="size-8"
-                      title="More"
-                    >
-                      <MoreHorizontal className="size-4" />
-                    </Button>
-                  </div>
-                </TableCell>
+                {/* <TableCell>
+//onek code likhte hove
+                  
+                </TableCell> */}
               </TableRow>
             ))
           ) : (

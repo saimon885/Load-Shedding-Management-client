@@ -15,7 +15,7 @@ interface IProps {
 export default function RoleGuard({ children, roles }: IProps) {
   const router = useRouter();
 
-  const { data, isPending, isError } = UsegetMeHook();
+  const { data, isLoading, isError } = UsegetMeHook();
 
   const user = data?.data;
 
@@ -23,15 +23,15 @@ export default function RoleGuard({ children, roles }: IProps) {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (isPending) {
+    if (isLoading) {
       return;
     }
     if (isError || !user) {
       router.replace("/login");
     }
-  }, [isPending, isError, user]);
+  }, [isLoading, isError, user]);
 
-  if (isPending) {
+  if (isLoading) {
     return <AuthLoading />;
   }
 

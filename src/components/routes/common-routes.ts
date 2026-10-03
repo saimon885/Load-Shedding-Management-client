@@ -1,7 +1,4 @@
-import {
-  Building2,
-  LayoutDashboard,
-} from "lucide-react";
+import { Building2, LayoutDashboard } from "lucide-react";
 
 export const commonRoutes = [
   {
@@ -20,6 +17,11 @@ export const commonRoutes = [
       {
         title: "Zones",
         url: "/dashboard/infrastructure/zone",
+        icon: Building2,
+      },
+      {
+        title: "Substations",
+        url: "/dashboard/infrastructure/zone/substation",
         icon: Building2,
       },
     ],

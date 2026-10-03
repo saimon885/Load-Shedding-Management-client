@@ -3,6 +3,7 @@
 import React from "react";
 import { UsegetMeHook } from "@/hooks/profile.hook";
 import { permissions } from "@/lib/permissions";
+import { Spinner } from "../ui/spinner";
 
 type Permission =
   | "zone:view"
@@ -28,12 +29,21 @@ interface CanProps {
 }
 
 const Can = ({ permission, children }: CanProps) => {
-  const { data } = UsegetMeHook();
+  const { data, isLoading } = UsegetMeHook();
 
   const role = data?.data?.role;
 
   if (!role) {
     return null;
+  }
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <p className="text-4xl text-destructive">
+          <Spinner /> Loading...
+        </p>
+      </div>
+    );
   }
 
   const [resource, action] = permission.split(":") as [

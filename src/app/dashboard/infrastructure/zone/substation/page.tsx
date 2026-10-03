@@ -2,7 +2,7 @@
 import GetAllsubstation from "@/components/dashboard/substation/GetAllsubstation";
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
 import { Button } from "@/components/ui/button";
-import { getZoneWiseSubstations } from "@/hooks/zone.hook";
+import { getZoneWiseSubstations } from "@/hooks/substation";
 import { Plus, Zap } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import React from "react";
@@ -11,6 +11,13 @@ import { BiLeftArrow } from "react-icons/bi";
 const substation = () => {
   const searchParams = useSearchParams();
   const zoneId = searchParams.get("zoneId") || "";
+  if (!zoneId) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <p className="text-4xl text-destructive">ZoneId Not Found</p>
+      </div>
+    );
+  }
 
   const { data: substationList, isLoading } = getZoneWiseSubstations(zoneId);
   if (isLoading || !substationList) {

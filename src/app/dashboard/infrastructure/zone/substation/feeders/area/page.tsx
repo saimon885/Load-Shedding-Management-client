@@ -1,13 +1,13 @@
 "use client";
 
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
-import { getFeederWiseAreas } from "@/hooks/zone.hook";
+
 import { useSearchParams } from "next/navigation";
 import { Plus, Zap } from "lucide-react";
 import GetAllAreas from "@/components/dashboard/areas/GetAllAreas";
 import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
-// import GetAllFeeders from "@/components/dashboard/feeders/GetAllFeeders";
+import { getFeederWiseAreas } from "@/hooks/area";
 
 const area = () => {
   const searchParams = useSearchParams();

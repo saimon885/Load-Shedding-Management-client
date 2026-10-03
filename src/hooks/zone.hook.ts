@@ -1,5 +1,11 @@
-import { GetAreasByFeeder, GetFeedersBySubstation, GetSingleZone, GetZone } from "@/api/zone.api";
-import { useQuery } from "@tanstack/react-query";
+import { CreateZone, GetZone, UpdateZone } from "@/api/zone.api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+export const CreateZoneHook = () => {
+  return useMutation({
+    mutationFn: CreateZone,
+  });
+};
 
 export const UseGetZoneHook = () => {
   return useQuery({
@@ -8,24 +14,9 @@ export const UseGetZoneHook = () => {
     retry: false,
   });
 };
-export const getZoneWiseSubstations = (id: string) => {
-  return useQuery({
-    queryKey: ["substation", id],
-    queryFn: () => GetSingleZone(id),
-    retry: false,
-  });
-};
-export const getSubstationWiseFeeders = (id: string) => {
-  return useQuery({
-    queryKey: ["feeders", id],
-    queryFn: () => GetFeedersBySubstation(id),
-    retry: false,
-  });
-};
-export const getFeederWiseAreas = (id: string) => {
-  return useQuery({
-    queryKey: ["areas", id],
-    queryFn: () => GetAreasByFeeder(id),
-    retry: false,
+
+export const UpdateZoneHook = () => {
+  return useMutation({
+    mutationFn: UpdateZone,
   });
 };

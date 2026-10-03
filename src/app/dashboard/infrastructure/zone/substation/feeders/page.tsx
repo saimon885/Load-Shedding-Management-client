@@ -1,13 +1,13 @@
 "use client";
-import { getSubstationWiseFeeders } from "@/hooks/zone.hook";
+
 import LoadingTable from "@/components/dashboard/zone/LoadingTable";
-import { getZoneWiseSubstations } from "@/hooks/zone.hook";
 import { Plus, Zap } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import GetAllFeeders from "@/components/dashboard/feeders/GetAllFeeders";
 import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
+import { getSubstationWiseFeeders } from "@/hooks/feeders";
 
 const feeders = () => {
   const searchParams = useSearchParams();

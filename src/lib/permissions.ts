@@ -10,7 +10,7 @@ export const permissions: Record<
     feeder: { view: true, create: true, update: true, delete: true },
     area: { view: true, create: true, update: true, delete: true },
     schedule: { view: false, create: true, update: false, delete: false },
-    outage: { view: false, create: true, update: false, delete: false },
+    outage: { view: true, create: true, update: true, delete: true },
   },
   ZONE_MANAGER: {
     zone: { view: true, create: true, update: true, delete: true },

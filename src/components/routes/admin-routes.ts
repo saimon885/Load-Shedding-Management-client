@@ -20,15 +20,15 @@ export const adminRoutes = [
     title: "Power Management",
     items: [
       {
-        title: "Scheduled Outages",
-        url: "/dashboard/outages/scheduled",
+        title: "All Outages",
+        url: "/dashboard/outages",
         icon: CalendarClock,
       },
-      {
-        title: "Unexpected Outages",
-        url: "/dashboard/outages/unexpected",
-        icon: AlertTriangle,
-      },
+      // {
+      //   title: "Unexpected Outages",
+      //   url: "/dashboard/outages/unexpected",
+      //   icon: AlertTriangle,
+      // },
       {
         title: "Outage Reports",
         url: "/dashboard/outages/reports",

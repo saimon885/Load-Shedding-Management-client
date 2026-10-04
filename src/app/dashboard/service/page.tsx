@@ -1,6 +1,7 @@
 "use client";
 
 import GetService from "@/components/dashboard/services/GetService";
+import { Spinner } from "@/components/ui/spinner";
 import { UsegetMyServiceHook } from "@/hooks/service";
 
 const ServicePage = () => {
@@ -10,7 +11,7 @@ const ServicePage = () => {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="size-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+        <Spinner />
       </div>
     );
   }

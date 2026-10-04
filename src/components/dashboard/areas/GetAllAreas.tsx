@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Building2, Eye } from "lucide-react";
+import { Building2, Eye, Gauge } from "lucide-react";
 
 import {
   Table,
@@ -37,7 +37,7 @@ const GetAllAreas = ({ areas }: AllAreasProps) => {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <Building2 className="size-4 text-primary" />
+                      <Gauge className="size-4 text-primary" />
                     </div>
 
                     <div className="min-w-0">

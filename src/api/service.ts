@@ -6,3 +6,7 @@ export const CreateService = (payload: any) => {
     body: payload,
   });
 };
+
+export const GetMyServices = () => {
+  return apiClient("/service/my-requests", { method: "GET" });
+};

@@ -36,7 +36,7 @@ const AllZones = ({ zones }: AllZonesProps) => {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                      <Building2 className="size-5 text-primary" />
+                      <MapPin className="size-5 text-primary" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p
@@ -127,7 +127,7 @@ const AllZones = ({ zones }: AllZonesProps) => {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                        <Building2 className="size-4.5 text-primary" />
+                        <MapPin className="size-4.5 text-primary" />
                       </div>
                       <div className="min-w-0">
                         <p className="font-semibold text-sm text-card-foreground truncate">

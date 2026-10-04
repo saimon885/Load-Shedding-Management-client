@@ -17,17 +17,6 @@ import {
 
 export const adminRoutes = [
   {
-    title: "Overview",
-    items: [
-      {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: LayoutDashboard,
-      },
-    ],
-  },
-
-  {
     title: "Power Management",
     items: [
       {
@@ -47,72 +36,24 @@ export const adminRoutes = [
       },
     ],
   },
-
-  {
-    title: "Infrastructure",
-    items: [
-      {
-        title: "Zones",
-        url: "/dashboard/infrastructure/zones",
-        icon: MapPin,
-      },
-      {
-        title: "Substations",
-        url: "/dashboard/infrastructure/substations",
-        icon: Building2,
-      },
-      {
-        title: "Feeders",
-        url: "/dashboard/infrastructure/feeders",
-        icon: Zap,
-      },
-      {
-        title: "Areas",
-        url: "/dashboard/infrastructure/areas",
-        icon: Gauge,
-      },
-    ],
-  },
-
-  {
-    title: "Operations",
-    items: [
-      {
-        title: "Technicians",
-        url: "/dashboard/operations/technicians",
-        icon: Wrench,
-      },
-      {
-        title: "Assignments",
-        url: "/dashboard/operations/assignments",
-        icon: Users,
-      },
-      {
-        title: "Restoration",
-        url: "/dashboard/operations/restoration",
-        icon: Activity,
-      },
-    ],
-  },
-
-  {
-    title: "System",
-    items: [
-      {
-        title: "Notifications",
-        url: "/dashboard/notifications",
-        icon: Bell,
-      },
-      {
-        title: "Analytics",
-        url: "/dashboard/analytics",
-        icon: BarChart3,
-      },
-      {
-        title: "Settings",
-        url: "/dashboard/settings",
-        icon: Settings,
-      },
-    ],
-  },
+  // {
+  //   title: "Operations",
+  //   items: [
+  //     {
+  //       title: "Technicians",
+  //       url: "/dashboard/operations/technicians",
+  //       icon: Wrench,
+  //     },
+  //     {
+  //       title: "Assignments",
+  //       url: "/dashboard/operations/assignments",
+  //       icon: Users,
+  //     },
+  //     {
+  //       title: "Restoration",
+  //       url: "/dashboard/operations/restoration",
+  //       icon: Activity,
+  //     },
+  //   ],
+  // },
 ];

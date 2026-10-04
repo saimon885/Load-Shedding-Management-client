@@ -33,10 +33,10 @@ const roleRoutes: Partial<Record<UserRole, SidebarItems[]>> = {
 export function DashboardSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
 
-  // const roleSpecificRoutes = roleRoutes[role] ?? [];
+  const roleSpecificRoutes = roleRoutes[role] ?? [];
 
-  // const routes: SidebarItems[] = [...commonRoutes, ...roleSpecificRoutes];
-  const routes: SidebarItems[] = [...commonRoutes];
+  const routes: SidebarItems[] = [...commonRoutes, ...roleSpecificRoutes];
+  // const routes: SidebarItems[] = [...commonRoutes];
 
   return (
     <Sidebar

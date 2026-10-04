@@ -9,11 +9,7 @@ import {
 import { ReactNode } from "react";
 import { DashboardSidebar } from "./dashboard-sidebar";
 import { UsegetMeHook } from "@/hooks/profile.hook";
-export default function DashboardShell({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function DashboardShell({ children }: { children: ReactNode }) {
   const { data, isLoading } = UsegetMeHook();
 
   const role = data?.data?.role;
@@ -43,9 +39,7 @@ export default function DashboardShell({
           </div>
         </header>
 
-        <main className="flex-1 bg-muted/20">
-          {children}
-        </main>
+        <main className="flex-1 bg-muted/20">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

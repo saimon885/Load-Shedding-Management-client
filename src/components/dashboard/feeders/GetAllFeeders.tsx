@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Eye, Gauge, MapPin } from "lucide-react";
+import { Building2, Eye, Gauge, MapPin, Zap } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -35,7 +35,7 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                      <Building2 className="size-5 text-primary" />
+                      <Zap className="size-5 text-primary" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p
@@ -119,7 +119,7 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                        <Building2 className="size-4.5 text-primary" />
+                        <Zap className="size-4.5 text-primary" />
                       </div>
                       <div className="min-w-0">
                         <p className="font-semibold text-sm text-card-foreground truncate">

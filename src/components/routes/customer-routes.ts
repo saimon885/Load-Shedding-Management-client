@@ -7,26 +7,16 @@ import {
   CalendarClock,
   ClipboardList,
   Gauge,
-  LayoutDashboard,
+  GitPullRequest,
   MapPin,
   Settings,
   Users,
   Wrench,
   Zap,
 } from "lucide-react";
+import { MdPayment } from "react-icons/md";
 
 export const customerRoutes = [
-  {
-    title: "Overview",
-    items: [
-      {
-        title: "Dashboard",
-        url: "/dashboard",
-        icon: LayoutDashboard,
-      },
-    ],
-  },
-
   {
     title: "Power Management",
     items: [
@@ -49,38 +39,17 @@ export const customerRoutes = [
   },
 
   {
-    title: "Infrastructure",
+    title: "Services & Payments",
     items: [
       {
-        title: "Zones",
-        url: "/dashboard/customer/zone",
-        icon: MapPin,
+        title: "My-Services",
+        url: "/dashboard/service",
+        icon: GitPullRequest,
       },
       {
-        title: "Substations",
-        url: "/dashboard/infrastructure/substations",
-        icon: Building2,
-      },
-      {
-        title: "Feeders",
-        url: "/dashboard/infrastructure/feeders",
-        icon: Zap,
-      },
-      {
-        title: "Areas",
-        url: "/dashboard/infrastructure/areas",
-        icon: Gauge,
-      },
-    ],
-  },
-
-  {
-    title: "Operations",
-    items: [
-      {
-        title: "Technicians",
-        url: "/dashboard/operations/technicians",
-        icon: Wrench,
+        title: "My-Payment-History",
+        url: "/dashboard/my-payments",
+        icon: MdPayment,
       },
       {
         title: "Assignments",
@@ -91,27 +60,6 @@ export const customerRoutes = [
         title: "Restoration",
         url: "/dashboard/operations/restoration",
         icon: Activity,
-      },
-    ],
-  },
-
-  {
-    title: "System",
-    items: [
-      {
-        title: "Notifications",
-        url: "/dashboard/notifications",
-        icon: Bell,
-      },
-      {
-        title: "Analytics",
-        url: "/dashboard/analytics",
-        icon: BarChart3,
-      },
-      {
-        title: "Settings",
-        url: "/dashboard/settings",
-        icon: Settings,
       },
     ],
   },

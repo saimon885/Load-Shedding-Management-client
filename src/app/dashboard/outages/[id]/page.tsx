@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
+import GetAllTechnician from "@/components/dashboard/technician/GetAllTechnician";
+import TechnicianAssign from "@/components/dashboard/technician/TechnicianAssign";
 
 interface OutageDetailsProps {
   params: Promise<{ id: string }> | { id: string };
@@ -257,28 +259,11 @@ const OutageDetails = ({ params }: OutageDetailsProps) => {
                 </p>
               </div>
 
-              <Button
-                size="sm"
-                className="gap-1.5 cursor-pointer"
-                onClick={() =>
-                  console.log("Assign technician for outage:", outage.id)
-                }
-              >
-                <UserPlus className="size-4" />
-                Assign Technician
-              </Button>
+              <TechnicianAssign outageId={outage.id} />
             </div>
 
-            <div className="rounded-xl border border-dashed bg-muted/20 p-6 text-center">
-              <UserRoundCog className="size-8 mx-auto text-muted-foreground/60 mb-2" />
-
-              <p className="text-sm font-semibold text-foreground">
-                Technician List
-              </p>
-
-              <p className="text-xs text-muted-foreground mt-1">
-                Available technicians will appear here.
-              </p>
+            <div className="rounded-xl border border-dashed bg-muted/20 p-2 text-center">
+              <GetAllTechnician />
             </div>
           </div>
         </div>
@@ -328,9 +313,25 @@ const OutageDetails = ({ params }: OutageDetailsProps) => {
                 Technician
               </span>
 
-              <span className="text-muted-foreground font-medium mt-1">
-                Not Assigned
-              </span>
+              {outage?.assignments?.length > 0 ? (
+                <div className="mt-1 space-y-2">
+                  {outage.assignments.map((assignment: any) => (
+                    <div key={assignment.id}>
+                      <p className="text-foreground font-semibold">
+                        {assignment.technician?.name || "Unknown Technician"}
+                      </p>
+
+                      <p className="text-xs text-muted-foreground">
+                        {assignment.technician?.email || "No email available"}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <span className="text-muted-foreground font-medium mt-1">
+                  Not Assigned
+                </span>
+              )}
             </div>
           </div>
         </div>

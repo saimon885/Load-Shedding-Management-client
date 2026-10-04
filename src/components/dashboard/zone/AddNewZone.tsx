@@ -82,7 +82,6 @@ export function AddNewZone({ mode = "create", initialData }: AddNewZoneProps) {
                 description: "An error occurred while updating the zone.",
                 type: "error",
               });
-            
             },
           },
         );
@@ -104,7 +103,6 @@ export function AddNewZone({ mode = "create", initialData }: AddNewZoneProps) {
               description: "An error occurred while creating the zone.",
               type: "error",
             });
-           
           },
         });
       }

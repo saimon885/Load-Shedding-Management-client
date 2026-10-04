@@ -23,7 +23,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { CreateAreaHook } from "@/hooks/area";
 import { areaSchema } from "@/types/dashboard/infrastructure/ZSFA";
 
-
 type AreaFormValues = z.infer<typeof areaSchema>;
 
 export function AddNewArea({ feederId }: { feederId: string }) {

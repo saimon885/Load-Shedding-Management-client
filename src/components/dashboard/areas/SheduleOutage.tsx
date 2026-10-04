@@ -59,7 +59,6 @@ const SheduleOutage = ({ feederId, areaId }: Props) => {
   });
 
   const onSubmit = async (data: ScheduleOutageFormValues) => {
-    
     try {
       const payload = {
         dayOfWeek: data.dayOfWeek,

@@ -7,7 +7,6 @@ import { UsegetMeHook } from "@/hooks/profile.hook";
 export default function ProfilePage() {
   const { data, isLoading, isError } = UsegetMeHook();
 
-
   if (isLoading) {
     return (
       <main className="mt-18 flex min-h-[calc(100vh-72px)] items-center justify-center px-4">

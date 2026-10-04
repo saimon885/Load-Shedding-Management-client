@@ -6,3 +6,7 @@ export const CreateOutageReport = (payload: any) => {
     body: payload,
   });
 };
+
+export const GetOutageReport = () => {
+  return apiClient(`/outage-reports/get-report`, { method: "GET" });
+};

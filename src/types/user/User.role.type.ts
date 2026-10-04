@@ -1,1 +1,6 @@
-export type UserRole = "CUSTOMER" | "POWER_OPERATOR" | "TECHNICIAN" | "ZONE_MANAGER" | "ADMIN";
+export type UserRole =
+  | "CUSTOMER"
+  | "POWER_OPERATOR"
+  | "TECHNICIAN"
+  | "ZONE_MANAGER"
+  | "ADMIN";

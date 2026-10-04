@@ -31,7 +31,7 @@ export const adminRoutes = [
       // },
       {
         title: "Outage Reports",
-        url: "/dashboard/outages/reports",
+        url: "/dashboard/reports",
         icon: ClipboardList,
       },
     ],

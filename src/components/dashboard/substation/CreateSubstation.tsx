@@ -39,7 +39,6 @@ export function AddNewSubstation({ zoneId }: { zoneId: string }) {
 
   const onSubmit = async (data: SubstationFormValues) => {
     try {
-    
       createSubstation(
         { zoneId, ...data },
         {

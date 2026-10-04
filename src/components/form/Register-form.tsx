@@ -29,7 +29,6 @@ const RegisterForm = () => {
   });
 
   const handleRegister = (value: RegisterPayload) => {
- 
     // const payload = {
     //   name: value.name,
     //   email: value.email,

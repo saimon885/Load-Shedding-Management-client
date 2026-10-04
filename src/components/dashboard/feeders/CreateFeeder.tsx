@@ -22,7 +22,6 @@ import { useState } from "react";
 import { CreateFeederHook } from "@/hooks/feeders";
 import { feederSchema } from "@/types/dashboard/infrastructure/ZSFA";
 
-
 type feederFormValues = z.infer<typeof feederSchema>;
 
 export function AddNewFeeder({ substationId }: { substationId: string }) {
@@ -41,7 +40,6 @@ export function AddNewFeeder({ substationId }: { substationId: string }) {
 
   const onSubmit = async (data: feederFormValues) => {
     try {
-      
       createFeeder(
         { substationId, ...data },
         {

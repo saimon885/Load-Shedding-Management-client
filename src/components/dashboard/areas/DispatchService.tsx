@@ -46,7 +46,6 @@ const DispatchService = ({ areaId, feederId }: Props) => {
 
   const onSubmit = async (data: ServiceFormValues) => {
     try {
- 
       createService(data, {
         onSuccess: (res) => {
           toast.add({

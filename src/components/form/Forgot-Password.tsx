@@ -34,7 +34,6 @@ const ForgotPasswordHandle = () => {
     }
   }, [email]);
   const onSubmit = (data: ForgotPasswordFormData) => {
-   
     const payload = {
       email: email,
       newPassword: data.newPassword,

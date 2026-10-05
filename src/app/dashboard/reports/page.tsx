@@ -1,5 +1,4 @@
 "use client";
-
 import GetAllOutageReport from "@/components/dashboard/outageReport/GetAllOutageReport";
 import { UsegetOutageReportHook } from "@/hooks/outage-report";
 

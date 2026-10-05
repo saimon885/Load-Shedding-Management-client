@@ -1,4 +1,4 @@
-import { CreateOutageReport, GetOutageReport } from "@/api/outage-report";
+import { CreateOutageReport, GetOutageReport, UpdateReportStatus } from "@/api/outage-report";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const CreateOutageReportHook = () => {
@@ -12,5 +12,11 @@ export const UsegetOutageReportHook= () => {
     queryKey: ["outage-report"],
     queryFn: GetOutageReport,
     retry: false,
+  });
+};
+
+export const UpdateOutageReportStatusHook= () => {
+  return useMutation({
+    mutationFn: UpdateReportStatus,
   });
 };

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
+import UpdateReport from "./UpdateReport";
 
 interface GetAllOutageReportProps {
   report: any;
@@ -119,20 +120,7 @@ const GetAllOutageReport = ({ report }: GetAllOutageReportProps) => {
       </div>
 
       <div className="mt-5 flex items-center justify-end border-t pt-3.5">
-        <Button
-          onClick={() =>
-            console.log(
-              "Update report modal action invoked for context ID:",
-              report.id,
-            )
-          }
-          variant="outline"
-          size="sm"
-          className="w-full sm:w-auto flex items-center justify-center gap-1.5 text-xs font-semibold h-9 cursor-pointer"
-        >
-          <Edit3 className="size-3.5" />
-          Update Report Configuration
-        </Button>
+        <UpdateReport report={report} />
       </div>
     </div>
   );

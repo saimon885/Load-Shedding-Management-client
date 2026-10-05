@@ -10,3 +10,10 @@ export const CreateOutageReport = (payload: any) => {
 export const GetOutageReport = () => {
   return apiClient(`/outage-reports/get-report`, { method: "GET" });
 };
+
+export const UpdateReportStatus = (payload: any) => {
+  return apiClient(`/outage-reports/status/${payload.id}`, {
+    method: "PATCH",
+    body: payload,
+  });
+};

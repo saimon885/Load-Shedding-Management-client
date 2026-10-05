@@ -1,19 +1,5 @@
-import {
-  Activity,
-  AlertTriangle,
-  BarChart3,
-  Bell,
-  Building2,
-  CalendarClock,
-  ClipboardList,
-  Gauge,
-  LayoutDashboard,
-  MapPin,
-  Settings,
-  Users,
-  Wrench,
-  Zap,
-} from "lucide-react";
+import { CalendarClock, ClipboardList } from "lucide-react";
+import { MdDesignServices, MdOutlinePayments } from "react-icons/md";
 
 export const adminRoutes = [
   {
@@ -24,15 +10,20 @@ export const adminRoutes = [
         url: "/dashboard/outages",
         icon: CalendarClock,
       },
-      // {
-      //   title: "Unexpected Outages",
-      //   url: "/dashboard/outages/unexpected",
-      //   icon: AlertTriangle,
-      // },
       {
-        title: "Outage Reports",
-        url: "/dashboard/reports",
+        title: "Schedule Outages",
+        url: "/dashboard/schedule-outage",
         icon: ClipboardList,
+      },
+      {
+        title: "All Reports",
+        url: "/dashboard/all-services",
+        icon: MdDesignServices,
+      },
+      {
+        title: "All Payment History",
+        url: "/dashboard/all-payments",
+        icon: MdOutlinePayments,
       },
     ],
   },

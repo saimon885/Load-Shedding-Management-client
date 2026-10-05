@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Eye, Gauge, MapPin, Zap } from "lucide-react";
+import { Building2, Eye, Gauge, MapPin, Siren, Zap } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { AllFeedersProps } from "@/types/dashboard/infrastructure";
+import CreateEmergencyOutage from "./CreateEmergencyOutage";
 
 const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
   const router = useRouter();
@@ -73,16 +74,19 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                 </div>
               </div>
 
-              <div className="mt-4 sm:mt-5 flex items-center justify-end border-t pt-3">
+              <div className="mt-4 flex flex-col gap-2 border-t pt-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-end">
                 <Button
+                  type="button"
                   onClick={() => handlegetAreas(feeder.id)}
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-2 text-xs h-8 sm:h-9 px-3 w-full sm:w-auto justify-center cursor-pointer font-medium"
+                  className="h-9 w-full cursor-pointer justify-center gap-2 px-3 text-xs font-medium sm:w-auto"
                 >
                   <Eye className="size-4" />
                   View Areas
                 </Button>
+
+                <CreateEmergencyOutage feederId={feeder.id} />
               </div>
             </div>
           ))
@@ -164,6 +168,7 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                       <Eye className="size-4" />
                       View Areas
                     </Button>
+                     <CreateEmergencyOutage feederId={feeder.id} />
                   </TableCell>
                 </TableRow>
               ))

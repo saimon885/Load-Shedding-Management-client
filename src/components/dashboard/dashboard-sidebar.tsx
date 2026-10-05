@@ -21,12 +21,13 @@ import { SidebarItems } from "@/types/dashboard/sidebar-types";
 import { adminRoutes } from "../routes/admin-routes";
 import { customerRoutes } from "../routes/customer-routes";
 import { commonRoutes } from "../routes/common-routes";
+import { TechnicianRoutes } from "../routes/Technician-routes";
 
 const roleRoutes: Partial<Record<UserRole, SidebarItems[]>> = {
   ADMIN: adminRoutes,
   ZONE_MANAGER: customerRoutes,
   POWER_OPERATOR: customerRoutes,
-  TECHNICIAN: customerRoutes,
+  TECHNICIAN: TechnicianRoutes,
   CUSTOMER: customerRoutes,
 };
 

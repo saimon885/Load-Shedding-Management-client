@@ -1,9 +1,11 @@
 import {
   CreateOutage,
+  CreateOutageEmergency,
   DeleteOutage,
   GetAllOutage,
   GetNotification,
   GetOutageStates,
+  GetScheduleOutage,
   GetSingleOutage,
   UpdateOutage,
 } from "@/api/outage";
@@ -12,6 +14,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 export const CreateOutageHook = () => {
   return useMutation({
     mutationFn: CreateOutage,
+  });
+};
+export const CreateOutageEmergencyHook = () => {
+  return useMutation({
+    mutationFn: CreateOutageEmergency,
   });
 };
 export const UsegetMyNotification = () => {
@@ -25,6 +32,13 @@ export const UsegetAllOutageHook = () => {
   return useQuery({
     queryKey: ["outage"],
     queryFn: GetAllOutage,
+    retry: false,
+  });
+};
+export const UsegetScheduleOutage = () => {
+  return useQuery({
+    queryKey: ["schedule-outage"],
+    queryFn: GetScheduleOutage,
     retry: false,
   });
 };

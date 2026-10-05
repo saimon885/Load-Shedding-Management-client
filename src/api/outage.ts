@@ -3,11 +3,17 @@ import apiClient from "@/lib/ApiClient";
 export const CreateOutage = (payload: any) => {
   return apiClient(`/outages/create`, { method: "POST", body: payload });
 };
+export const CreateOutageEmergency = (payload: any) => {
+  return apiClient(`/outages/emergency`, { method: "POST", body: payload });
+};
 
 export const GetNotification = () => {
   return apiClient(`/notifications`, { method: "GET" });
 };
 
+export const GetScheduleOutage = () => {
+  return apiClient(`/schedules/get`, { method: "GET" });
+};
 export const GetAllOutage = () => {
   return apiClient(`/outages/get`, { method: "GET" });
 };

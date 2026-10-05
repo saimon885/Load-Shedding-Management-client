@@ -1,4 +1,4 @@
-import { CreateService, GetMyServices } from "@/api/service";
+import { CreateService, GetAllServices, GetMyServices } from "@/api/service";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const CreateServieHook = () => {
@@ -11,6 +11,13 @@ export const UsegetMyServiceHook = () => {
   return useQuery({
     queryKey: ["my-service"],
     queryFn: GetMyServices,
+    retry: false,
+  });
+};
+export const UsegetAllServiceHook = () => {
+  return useQuery({
+    queryKey: ["all-service"],
+    queryFn: GetAllServices,
     retry: false,
   });
 };

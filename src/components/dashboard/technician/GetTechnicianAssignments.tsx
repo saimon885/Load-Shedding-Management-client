@@ -250,29 +250,32 @@ const TechnicianAssignments = () => {
                 <p className="mb-2 text-xs font-medium text-muted-foreground">
                   Update Assignment Status
                 </p>
+                {currentStatus === "COMPLETED" ? (
+                  ""
+                ) : (
+                  <div className="flex gap-2">
+                    <select
+                      value={currentStatus}
+                      onChange={(e) =>
+                        handleStatusChange(assignment.id, e.target.value)
+                      }
+                      className="h-9 flex-1 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+                    >
+                      <option value="PENDING">Pending</option>
 
-                <div className="flex gap-2">
-                  <select
-                    value={currentStatus}
-                    onChange={(e) =>
-                      handleStatusChange(assignment.id, e.target.value)
-                    }
-                    className="h-9 flex-1 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-                  >
-                    <option value="PENDING">Pending</option>
+                      <option value="ACCEPTED">Accepted</option>
 
-                    <option value="ACCEPTED">Accepted</option>
+                      <option value="IN_PROGRESS">In Progress</option>
 
-                    <option value="IN_PROGRESS">In Progress</option>
+                      <option value="COMPLETED">Completed</option>
+                    </select>
 
-                    <option value="COMPLETED">Completed</option>
-                  </select>
-
-                  <TechnicianUpdateStatus
-                    assignment={assignment}
-                    currentStatus={currentStatus}
-                  />
-                </div>
+                    <TechnicianUpdateStatus
+                      assignment={assignment}
+                      currentStatus={currentStatus}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>

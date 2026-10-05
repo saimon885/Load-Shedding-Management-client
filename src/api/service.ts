@@ -10,3 +10,7 @@ export const CreateService = (payload: any) => {
 export const GetMyServices = () => {
   return apiClient("/service/my-requests", { method: "GET" });
 };
+
+export const GetAllServices = () => {
+  return apiClient("/service/all-requests", { method: "GET" });
+};

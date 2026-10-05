@@ -316,7 +316,7 @@ const OutageDetails = ({ params }: OutageDetailsProps) => {
               {outage?.assignments?.length > 0 ? (
                 <div className="mt-1 space-y-2">
                   {outage.assignments.map((assignment: any) => (
-                    <div key={assignment.id}>
+                    <div key={assignment.technician.email}>
                       <p className="text-foreground font-semibold">
                         {assignment.technician?.name || "Unknown Technician"}
                       </p>

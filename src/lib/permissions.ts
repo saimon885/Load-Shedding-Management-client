@@ -29,6 +29,7 @@ export const permissions: Record<
     substation: { view: true, create: false, update: false, delete: false },
     feeder: { view: true, create: false, update: false, delete: false },
     area: { view: true, create: false, update: false, delete: false },
+    assigments: { view: true, create: false, update: true, delete: false },
   },
   CUSTOMER: {
     zone: { view: true, create: false, update: false, delete: false },

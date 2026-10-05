@@ -90,21 +90,23 @@ const ChangeOutageStatus = ({ outage }: { outage: any }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button
-          disabled={
-            isPending ||
-            outage.status === "RESTORED" ||
-            outage.status === "CANCELLED"
-          }
-          variant="outline"
-          size="sm"
-          className="flex items-center gap-1.5 text-xs font-semibold h-9 cursor-pointer border-muted-foreground/20 hover:bg-muted"
-        >
-          <Settings2 className="size-4 animate-spin-slow text-muted-foreground" />
-          {isPending ? "Transitioning..." : "Manage State"}
-        </Button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        render={
+          <Button
+            disabled={
+              isPending ||
+              outage.status === "RESTORED" ||
+              outage.status === "CANCELLED"
+            }
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-1.5 text-xs font-semibold h-9 cursor-pointer border-muted-foreground/20 hover:bg-muted"
+          >
+            <Settings2 className="size-4 animate-spin-slow text-muted-foreground" />
+            {isPending ? "Transitioning..." : "Manage State"}
+          </Button>
+        }
+      ></DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         className="w-48 p-1 rounded-xl shadow-md border-muted/80"

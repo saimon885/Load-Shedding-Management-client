@@ -7,3 +7,6 @@ export const CreatePayment = (payload: any) => {
 export const GetMyPayments = () => {
   return apiClient("/payments/my-payment-history", { method: "GET" });
 };
+export const GetallPayments = () => {
+  return apiClient("/payments/all-payment-history", { method: "GET" });
+};

@@ -138,7 +138,7 @@ const Outage = ({ outage }: { outage: any }) => {
           </div>
         </div>
       </div>
-      ```tsx
+
       <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between border-t pt-3.5 gap-2">
         <div className="flex items-center gap-2">
           {/* Remove */}
@@ -157,7 +157,6 @@ const Outage = ({ outage }: { outage: any }) => {
           <ArrowRight className="size-3.5" />
         </Link>
       </div>
-      ```
     </div>
   );
 };

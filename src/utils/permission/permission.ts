@@ -18,5 +18,7 @@ export type Resource =
   | "outage_states"
   | "technician_assign"
   | "technician"
+  | "states_admin"
+  | "states_znop"
   | string;
 export type Action = "view" | "create" | "update" | "delete";

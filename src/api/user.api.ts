@@ -1,5 +1,4 @@
 import apiClient from "@/lib/ApiClient";
-import { FormValues } from "@/types/user/User.type";
 
 export const GetMe = () => {
   return apiClient("/users/me", { method: "GET" });

@@ -1,5 +1,6 @@
 import { ShieldCheck, Zap } from "lucide-react";
 import OTP from "@/components/form/OTP";
+import { Suspense } from "react";
 
 const InputOTPDemo = () => {
   return (
@@ -74,8 +75,9 @@ const InputOTPDemo = () => {
                   Enter it below to confirm your email address.
                 </p>
               </div>
-
-              <OTP />
+              <Suspense fallback={<div>Loading...</div>}>
+                <OTP />
+              </Suspense>
             </div>
           </div>
         </div>

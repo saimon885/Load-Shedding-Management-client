@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { KeyRound, ShieldCheck } from "lucide-react";
 
 import ForgotPasswordHandle from "@/components/form/Forgot-Password";
@@ -80,8 +80,9 @@ const ForgotPassword = () => {
                   Enter the verification code and your new password below.
                 </p>
               </div>
-
-              <ForgotPasswordHandle />
+              <Suspense fallback={<div>Loading...</div>}>
+                <ForgotPasswordHandle />
+              </Suspense>
             </div>
           </div>
         </div>

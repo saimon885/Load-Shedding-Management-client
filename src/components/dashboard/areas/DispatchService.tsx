@@ -18,6 +18,7 @@ import { useState } from "react";
 import { serviceSchema } from "@/validation/form/dashboard/service";
 import { CreateServieHook } from "@/hooks/service";
 import { toast } from "@/components/ui/toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 type ServiceFormValues = z.infer<typeof serviceSchema>;
 
@@ -29,6 +30,7 @@ type Props = {
 const DispatchService = ({ areaId, feederId }: Props) => {
   const [open, setOpen] = useState(false);
   const { mutate: createService, isPending } = CreateServieHook();
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -52,6 +54,9 @@ const DispatchService = ({ areaId, feederId }: Props) => {
             title: "Service Created",
             description: "The service has been created successfully.",
             type: "success",
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["all-service"],
           });
           setOpen(false);
         },

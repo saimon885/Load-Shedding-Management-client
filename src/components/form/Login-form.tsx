@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "../ui/spinner";
 import ForgotPasswordComponent from "./ForgotPasswordComponent";
 import GoogleLoginResponse from "../google/GoogleLogin";
+import DemoLoginButtons from "./DemoLoginButtons";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -145,7 +146,7 @@ const LoginForm = () => {
           </Field>
         </FieldGroup>
       </form>
-
+      <DemoLoginButtons />
       <FieldSeparator className="mt-3">Or continue with</FieldSeparator>
 
       <GoogleLoginResponse />

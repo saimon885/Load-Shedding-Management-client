@@ -24,7 +24,7 @@ const DeleteOutage = ({ outageId }: { outageId: string }) => {
       color: "var(--foreground)",
     }).then((result: { isConfirmed: any }) => {
       if (result.isConfirmed) {
-        deleteOutage(outageId, {
+        deleteOutage(undefined, {
           onSuccess: () => {
             toast.add({
               title: "Record Deleted",

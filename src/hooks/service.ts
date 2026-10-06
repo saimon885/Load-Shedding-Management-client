@@ -9,7 +9,7 @@ export const CreateServieHook = () => {
 
 export const UsegetMyServiceHook = () => {
   return useQuery({
-    queryKey: ["my-service"],
+    queryKey: ["all-service"],
     queryFn: GetMyServices,
     retry: false,
   });

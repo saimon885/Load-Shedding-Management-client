@@ -32,7 +32,9 @@ type Permission =
   | "emergency:create"
   | "outage_states:view"
   | "technician_assign:create"
-  | "technician:view";
+  | "technician:view"
+  | "states_admin:view"
+  | "states_znop:view";
 
 interface CanProps {
   permission: Permission;

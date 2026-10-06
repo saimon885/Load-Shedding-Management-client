@@ -17,49 +17,20 @@ import {
 import { MdPayment } from "react-icons/md";
 
 export const customerRoutes = [
-  {
-    title: "Power Management",
-    items: [
-      {
-        title: "Scheduled Outages",
-        url: "/dashboard/outages/scheduled",
-        icon: CalendarClock,
-      },
-      {
-        title: "Unexpected Outages",
-        url: "/dashboard/outages/unexpected",
-        icon: AlertTriangle,
-      },
-      {
-        title: "Outage Reports",
-        url: "/dashboard/outages/reports",
-        icon: ClipboardList,
-      },
-    ],
-  },
+ 
 
   {
     title: "Services & Payments",
     items: [
       {
         title: "My-Services",
-        url: "/dashboard/service",
+        url: "/dashboard/customer/service",
         icon: GitPullRequest,
       },
       {
         title: "My-Payment-History",
-        url: "/dashboard/my-payments",
+        url: "/dashboard/customer/my-payments",
         icon: MdPayment,
-      },
-      {
-        title: "Assignments",
-        url: "/dashboard/operations/assignments",
-        icon: Users,
-      },
-      {
-        title: "Restoration",
-        url: "/dashboard/operations/restoration",
-        icon: Activity,
       },
     ],
   },

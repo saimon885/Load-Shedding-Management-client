@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { AllFeedersProps } from "@/types/dashboard/infrastructure";
 import CreateEmergencyOutage from "./CreateEmergencyOutage";
+import Can from "@/components/auth/RoleCan";
 
 const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
   const router = useRouter();
@@ -85,8 +86,9 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                   <Eye className="size-4" />
                   View Areas
                 </Button>
-
-                <CreateEmergencyOutage feederId={feeder.id} />
+                <Can permission="emergency:create">
+                  <CreateEmergencyOutage feederId={feeder.id} />
+                </Can>
               </div>
             </div>
           ))
@@ -168,7 +170,9 @@ const GetAllFeeders = ({ feeders }: AllFeedersProps) => {
                       <Eye className="size-4" />
                       View Areas
                     </Button>
-                     <CreateEmergencyOutage feederId={feeder.id} />
+                    <Can permission="emergency:create">
+                      <CreateEmergencyOutage feederId={feeder.id} />
+                    </Can>
                   </TableCell>
                 </TableRow>
               ))

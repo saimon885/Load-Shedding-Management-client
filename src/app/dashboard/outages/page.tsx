@@ -3,6 +3,7 @@
 import OutageStates from "@/components/dashboard/outage/OutageStates";
 import Outage from "@/components/dashboard/outage/Outage";
 import { UsegetAllOutageHook } from "@/hooks/outage.hook";
+import Can from "@/components/auth/RoleCan";
 
 const OutagePage = () => {
   const { data, isLoading } = UsegetAllOutageHook();
@@ -31,7 +32,9 @@ const OutagePage = () => {
       </div>
 
       {/* Outage Statistics */}
-      <OutageStates />
+      <Can permission="outage_states:view">
+        <OutageStates />
+      </Can>
 
       {/* Outage List */}
       <div className="w-full space-y-4 grid grid-cols-1 lg:grid-cols-2 lg:gap-3">

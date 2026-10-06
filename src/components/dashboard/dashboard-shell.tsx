@@ -12,6 +12,7 @@ import { UsegetMeHook } from "@/hooks/profile.hook";
 import { Button } from "../ui/button";
 import { Bell } from "lucide-react";
 import Link from "next/link";
+
 export default function DashboardShell({ children }: { children: ReactNode }) {
   const { data, isLoading } = UsegetMeHook();
 

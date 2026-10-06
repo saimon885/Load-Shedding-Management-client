@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
 import UpdateReport from "./UpdateReport";
+import Can from "@/components/auth/RoleCan";
 
 interface GetAllOutageReportProps {
   report: any;
@@ -120,7 +121,9 @@ const GetAllOutageReport = ({ report }: GetAllOutageReportProps) => {
       </div>
 
       <div className="mt-5 flex items-center justify-end border-t pt-3.5">
-        <UpdateReport report={report} />
+        <Can permission="outage_report:update">
+          <UpdateReport report={report} />
+        </Can>
       </div>
     </div>
   );

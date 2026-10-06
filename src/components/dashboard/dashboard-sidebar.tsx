@@ -22,11 +22,13 @@ import { adminRoutes } from "../routes/admin-routes";
 import { customerRoutes } from "../routes/customer-routes";
 import { commonRoutes } from "../routes/common-routes";
 import { TechnicianRoutes } from "../routes/Technician-routes";
+import { operatorRoutes } from "../routes/Operator-routes";
+import { zone_manager_Routes } from "../routes/Zone-manager-routes";
 
 const roleRoutes: Partial<Record<UserRole, SidebarItems[]>> = {
   ADMIN: adminRoutes,
-  ZONE_MANAGER: customerRoutes,
-  POWER_OPERATOR: customerRoutes,
+  ZONE_MANAGER: zone_manager_Routes,
+  POWER_OPERATOR: operatorRoutes,
   TECHNICIAN: TechnicianRoutes,
   CUSTOMER: customerRoutes,
 };

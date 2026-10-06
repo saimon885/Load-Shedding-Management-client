@@ -14,5 +14,9 @@ export type Resource =
   | "schedule"
   | "outage"
   | "assigments"
+  | "emergency"
+  | "outage_states"
+  | "technician_assign"
+  | "technician"
   | string;
 export type Action = "view" | "create" | "update" | "delete";

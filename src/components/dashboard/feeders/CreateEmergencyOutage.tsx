@@ -100,12 +100,13 @@ const CreateEmergencyOutage = ({ feederId }: CreateEmergencyOutageProps) => {
         render={
           <Button
             type="button"
+            disabled={isPending}
             variant="destructive"
             size="sm"
             className="h-9 w-full cursor-pointer justify-center gap-2 px-3 text-xs font-medium sm:w-auto"
           >
             <Siren className="size-4" />
-            Emergency Outage
+            {isPending ? "Createing..." : "Emergency Outage"}
           </Button>
         }
       />
@@ -181,9 +182,9 @@ const CreateEmergencyOutage = ({ feederId }: CreateEmergencyOutageProps) => {
               }
             />
 
-            <Button type="submit" variant="destructive">
+            <Button type="submit" disabled={isPending} variant="destructive">
               <Siren className="mr-2 size-4" />
-              Create Emergency Outage
+              {isPending ? "Createing..." : " Create Emergency Outage"}
             </Button>
           </DialogFooter>
         </form>

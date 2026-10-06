@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { BiLeftArrow } from "react-icons/bi";
 import GetAllTechnician from "@/components/dashboard/technician/GetAllTechnician";
 import TechnicianAssign from "@/components/dashboard/technician/TechnicianAssign";
+import Can from "@/components/auth/RoleCan";
 
 interface OutageDetailsProps {
   params: Promise<{ id: string }> | { id: string };
@@ -245,27 +246,28 @@ const OutageDetails = ({ params }: OutageDetailsProps) => {
               </div>
             </div>
           </div>
+          <Can permission="technician:view">
+            <div className="rounded-xl border bg-card p-5 shadow-xs space-y-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-3">
+                <div>
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                    <Wrench className="size-4 text-primary/70" />
+                    Technician Assignment
+                  </h2>
 
-          <div className="rounded-xl border bg-card p-5 shadow-xs space-y-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-3">
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                  <Wrench className="size-4 text-primary/70" />
-                  Technician Assignment
-                </h2>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Assign a technician to handle this outage restoration.
+                  </p>
+                </div>
 
-                <p className="text-xs text-muted-foreground mt-1">
-                  Assign a technician to handle this outage restoration.
-                </p>
+                <TechnicianAssign outageId={outage.id} />
               </div>
 
-              <TechnicianAssign outageId={outage.id} />
+              <div className="rounded-xl border border-dashed bg-muted/20 p-2 text-center">
+                <GetAllTechnician />
+              </div>
             </div>
-
-            <div className="rounded-xl border border-dashed bg-muted/20 p-2 text-center">
-              <GetAllTechnician />
-            </div>
-          </div>
+          </Can>
         </div>
 
         <div className="rounded-xl border bg-card p-5 shadow-xs space-y-4 md:col-span-1">

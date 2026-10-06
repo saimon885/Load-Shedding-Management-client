@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import UpdateOutage from "./UpdateOutage";
 import DeleteOutage from "./DeleteOutage";
+import Can from "@/components/auth/RoleCan";
 
 const Outage = ({ outage }: { outage: any }) => {
   const getStatusConfig = (status: string) => {
@@ -141,11 +142,12 @@ const Outage = ({ outage }: { outage: any }) => {
 
       <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between border-t pt-3.5 gap-2">
         <div className="flex items-center gap-2">
-          {/* Remove */}
-          <DeleteOutage outageId={outage.id} />
-
-          {/* Update */}
-          <UpdateOutage outage={outage} />
+          <Can permission="outage:delete">
+            <DeleteOutage outageId={outage.id} />
+          </Can>
+          <Can permission="outage:update">
+            <UpdateOutage outage={outage} />
+          </Can>
         </div>
 
         {/* Detailed Analytics */}

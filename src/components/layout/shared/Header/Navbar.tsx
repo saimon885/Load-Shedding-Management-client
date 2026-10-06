@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  LayoutDashboard,
 } from "lucide-react";
 import LogOutUser from "./LogOut";
 import { UsegetMeHook } from "@/hooks/profile.hook";
@@ -20,13 +21,11 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/outage", label: "outage" },
   { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
 ];
 
 const MENU_ITEMS = [
   { href: "/profile", label: "My Profile", icon: User },
-  { href: "/settings", label: "Settings", icon: Settings },
-  { href: "/help", label: "Help & Support", icon: HelpCircle },
+  { href: "/dashboard", label: "Dashbooard", icon: LayoutDashboard },
 ];
 
 export default function Navbar() {

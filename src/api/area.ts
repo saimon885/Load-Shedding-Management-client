@@ -1,7 +1,7 @@
 import apiClient from "@/lib/ApiClient";
 
-export const GetAreasByFeeder = (id: string) => {
-  return apiClient(`/areas/get/${id}`, { method: "GET" });
+export const GetAreasByFeeder = (id: string, params: any) => {
+  return apiClient(`/areas/get/${id}`, { params });
 };
 export const GetSingeArea = (id: string) => {
   return apiClient(`/areas/single/${id}`, { method: "GET" });

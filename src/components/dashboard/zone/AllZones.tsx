@@ -14,9 +14,14 @@ import { useRouter } from "next/navigation";
 import { AllZonesProps } from "@/types/dashboard/infrastructure";
 import { AddNewZone } from "@/components/dashboard/zone/AddNewZone";
 import Can from "@/components/auth/RoleCan";
+import LoadingTable from "./LoadingTable";
 
-const AllZones = ({ zones }: AllZonesProps) => {
+const AllZones = ({ zones, isloading }: AllZonesProps) => {
   const router = useRouter();
+  
+  if (isloading || !zones) {
+    return <LoadingTable />;
+  }
 
   const handlegetSubstation = (zoneId: string) => {
     const params = new URLSearchParams({ zoneId: zoneId });

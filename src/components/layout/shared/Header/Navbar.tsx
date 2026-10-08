@@ -31,7 +31,8 @@ const MENU_ITEMS = [
 export default function Navbar() {
   const pathname = usePathname();
   const { data, isLoading } = UsegetMeHook();
-  // console.log(data);
+
+  console.log(data);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

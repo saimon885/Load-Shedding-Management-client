@@ -7,10 +7,15 @@ export const CreateAreaHook = () => {
   });
 };
 
-export const getFeederWiseAreas = (id: string) => {
+export const getFeederWiseAreas = (payload: any) => {
   return useQuery({
-    queryKey: ["areas", id],
-    queryFn: () => GetAreasByFeeder(id),
+    queryKey: [
+      "areas",
+      payload.id,
+      payload.params?.searchTerm,
+      payload.params?.page,
+    ],
+    queryFn: () => GetAreasByFeeder(payload.id, payload.params),
     retry: false,
   });
 };

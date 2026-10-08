@@ -6,7 +6,7 @@ export const TechnicianRoutes = [
     items: [
       {
         title: "Assignments",
-        url: "/dashboard/technician-assignments",
+        url: "/dashboard/technician/technician-assignments",
         icon: Users,
       },
     ],

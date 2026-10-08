@@ -65,6 +65,12 @@ export const permissions: Record<
     area: { view: true, create: false, update: false, delete: false },
     assigments: { view: true, create: false, update: true, delete: false },
     outage: { view: true, create: false, update: true, delete: false },
+    technician_assign: {
+      view: true,
+      create: true,
+      update: true,
+      delete: false,
+    },
   },
   CUSTOMER: {
     zone: { view: true, create: false, update: false, delete: false },

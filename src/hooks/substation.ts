@@ -6,11 +6,16 @@ export const CreateSubstationHook = () => {
     mutationFn: CreateSubstation,
   });
 };
-
-export const getZoneWiseSubstations = (id: string) => {
+export const getZoneWiseSubstations = (payload: any) => {
   return useQuery({
-    queryKey: ["substation", id],
-    queryFn: () => GetSingleZone(id),
+    queryKey: [
+      "substation",
+      payload.id,
+      payload.params?.searchTerm,
+      payload.params?.page,
+    ],
+    queryFn: () => GetSingleZone(payload.id, payload.params),
     retry: false,
+    enabled: !!payload.id,
   });
 };

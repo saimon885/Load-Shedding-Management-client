@@ -7,10 +7,11 @@ export const CreateZoneHook = () => {
   });
 };
 
-export const UseGetZoneHook = () => {
+export const UseGetZoneHook = (params: any) => {
+  console.log("hook", params);
   return useQuery({
-    queryKey: ["zones"],
-    queryFn: GetZone,
+    queryKey: ["zones", params],
+    queryFn: () => GetZone(params),
     retry: false,
   });
 };

@@ -28,10 +28,22 @@ export const UsegetMyNotification = () => {
     retry: false,
   });
 };
-export const UsegetAllOutageHook = () => {
+export const UsegetAllOutageHook = (params?: {
+  type?: string;
+  status?: string;
+  reason?: string;
+  page?: number;
+  limit?: number;
+}) => {
   return useQuery({
-    queryKey: ["outage"],
-    queryFn: GetAllOutage,
+    queryKey: [
+      "outages",
+      params?.type,
+      params?.status,
+      params?.reason,
+      params?.page,
+    ],
+    queryFn: () => GetAllOutage(params),
     retry: false,
   });
 };

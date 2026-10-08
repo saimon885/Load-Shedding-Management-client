@@ -14,8 +14,8 @@ export const GetNotification = () => {
 export const GetScheduleOutage = () => {
   return apiClient(`/schedules/get`, { method: "GET" });
 };
-export const GetAllOutage = () => {
-  return apiClient(`/outages/get`, { method: "GET" });
+export const GetAllOutage = (params: any) => {
+  return apiClient(`/outages/get`, { params });
 };
 
 export const GetSingleOutage = (id: string) => {

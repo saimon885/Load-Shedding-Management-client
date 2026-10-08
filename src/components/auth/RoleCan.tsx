@@ -32,6 +32,7 @@ type Permission =
   | "emergency:create"
   | "outage_states:view"
   | "technician_assign:create"
+  | "technician_assign:update"
   | "technician:view"
   | "states_admin:view"
   | "states_znop:view";

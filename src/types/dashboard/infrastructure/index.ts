@@ -10,6 +10,7 @@ export interface Zone {
 }
 
 export interface AllZonesProps {
+  isloading: any;
   zones: Zone[];
 }
 

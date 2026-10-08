@@ -1,3 +1,4 @@
+import Can from "@/components/auth/RoleCan";
 import GetTechnicianAssignments from "@/components/dashboard/technician/GetTechnicianAssignments";
 
 const technicianAssignments = () => {
@@ -12,8 +13,9 @@ const technicianAssignments = () => {
           Manage and track your assigned outage tasks.
         </p>
       </div>
-
-      <GetTechnicianAssignments />
+      <Can permission="technician_assign:update">
+        <GetTechnicianAssignments />
+      </Can>
     </div>
   );
 };
